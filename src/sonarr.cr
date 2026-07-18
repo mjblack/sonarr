@@ -7,5 +7,7 @@ end
 
 require "./sonarr/support"
 require "./sonarr/support_enums"
+require "./sonarr/error"
+require "./sonarr/query"
 require "./sonarr/client"
 require "./sonarr/model"
