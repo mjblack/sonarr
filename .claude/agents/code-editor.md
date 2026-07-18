@@ -24,7 +24,7 @@ You are the **Code Editor** agent for the `sonarr` Crystal shard — a typed cli
 ## Definition of done (enforce before reporting)
 1. `crystal run tools/generate.cr` runs clean and is idempotent (regenerate twice → no diff).
 2. `crystal build --no-codegen src/sonarr.cr` compiles with no errors.
-3. `crystal tool format` applied.
+3. `crystal tool format` applied and `bin/ameba` passes (no new offenses).
 4. Output matches the schema for the properties in scope.
 
 ## Reporting
