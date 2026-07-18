@@ -1,9 +1,8 @@
 require "./spec_helper"
 
 describe Sonarr do
-  # TODO: Write tests
-
-  it "works" do
-    false.should eq(true)
+  it "exposes a version string" do
+    Sonarr::VERSION.should be_a(String)
+    Sonarr::VERSION.should_not be_empty
   end
 end

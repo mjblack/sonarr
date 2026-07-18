@@ -1,13 +1,21 @@
 require "../spec_helper"
 
 describe Sonarr::Model::CommandResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (all properties optional)" do
+    cmd = Sonarr::Model::CommandResource.from_json("{}")
+    cmd.id.should be_nil
+    cmd.body.should be_nil
+    cmd.priority.should be_nil
+    cmd.queued.should be_nil
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "name": "TestCommand",
       "commandName": "TestCommand",
       "message": "Test message",
-      "body": {"sendUpdatesToClient": true, "updateScheduledTask": false, "requiresDiskAccess": true, "isExclusive": false, "isLongRunning": true, "trigger": "manual", "suppressMessages": false},
+      "body": {"sendUpdatesToClient": true, "trigger": "manual"},
       "priority": "normal",
       "status": "started",
       "result": "successful",
@@ -29,19 +37,20 @@ describe Sonarr::Model::CommandResource do
     cmd.command_name.should eq("TestCommand")
     cmd.message.should eq("Test message")
     cmd.body.should be_a(Sonarr::Model::Command)
+    present(cmd.body).trigger.should eq(Sonarr::CommandTrigger::Manual)
     cmd.priority.should eq(Sonarr::CommandPriority::Normal)
     cmd.status.should eq(Sonarr::CommandStatus::Started)
     cmd.result.should eq(Sonarr::CommandResult::Successful)
-    cmd.queued.should eq("2023-01-01T12:00:00Z")
-    cmd.started.should eq("2023-01-01T12:01:00Z")
-    cmd.ended.should eq("2023-01-01T12:02:00Z")
+    cmd.queued.should eq(Time.utc(2023, 1, 1, 12, 0, 0))
+    cmd.started.should eq(Time.utc(2023, 1, 1, 12, 1, 0))
+    cmd.ended.should eq(Time.utc(2023, 1, 1, 12, 2, 0))
     cmd.duration.should eq("60")
     cmd.exception.should be_nil
     cmd.trigger.should eq(Sonarr::CommandTrigger::Manual)
     cmd.client_user_agent.should eq("SpecAgent")
-    cmd.state_change_time.should eq("2023-01-01T12:01:00Z")
+    cmd.state_change_time.should eq(Time.utc(2023, 1, 1, 12, 1, 0))
     cmd.send_updates_to_client.should eq(true)
     cmd.update_scheduled_task.should eq(false)
-    cmd.last_execution_time.should eq("2023-01-01T12:00:00Z")
+    cmd.last_execution_time.should eq(Time.utc(2023, 1, 1, 12, 0, 0))
   end
-end 
+end

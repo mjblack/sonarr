@@ -1,7 +1,14 @@
 require "../spec_helper"
 
 describe Sonarr::Model::HostConfigResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (all properties optional)" do
+    config = Sonarr::Model::HostConfigResource.from_json("{}")
+    config.id.should be_nil
+    config.authentication_method.should be_nil
+    config.update_mechanism.should be_nil
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "bindAddress": "0.0.0.0",
@@ -80,4 +87,4 @@ describe Sonarr::Model::HostConfigResource do
     config.backup_retention.should eq(28)
     config.trust_cgnat_ip_addresses.should eq(false)
   end
-end 
+end

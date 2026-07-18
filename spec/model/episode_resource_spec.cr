@@ -1,7 +1,15 @@
 require "../spec_helper"
 
 describe Sonarr::Model::EpisodeResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (arrays default to empty)" do
+    ep = Sonarr::Model::EpisodeResource.from_json("{}")
+    ep.id.should be_nil
+    ep.series.should be_nil
+    ep.episode_file.should be_nil
+    ep.images.should be_empty
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "seriesId": 2,
@@ -16,7 +24,6 @@ describe Sonarr::Model::EpisodeResource do
       "runtime": 45,
       "finaleType": "season",
       "overview": "The first episode.",
-      "episodeFile": {"id": 4, "relativePath": "S01E02.mkv", "size": 123456, "dateAdded": "2023-01-01T12:00:00Z", "quality": {"id": 1, "name": "HDTV"}, "qualityModifier": 0, "mediaInfo": {"audioBitrate": 128, "videoBitrate": 1000}},
       "hasFile": true,
       "monitored": true,
       "absoluteEpisodeNumber": 2,
@@ -26,8 +33,8 @@ describe Sonarr::Model::EpisodeResource do
       "unverifiedSceneNumbering": false,
       "endTime": "2023-01-01T14:00:00Z",
       "grabDate": "2023-01-01T15:00:00Z",
-      "series": {"id": 2, "title": "Test Series", "status": "continuing", "ended": false, "year": 2020, "qualityProfileId": 1, "seasonFolder": true, "monitored": true, "monitorNewItems": "all", "useSceneNumbering": false, "runtime": 45, "tvdbId": 12345, "tvRageId": 67890, "tvMazeId": 11111, "tmdbId": 22222, "seriesType": "standard", "added": "2020-01-01T12:00:00Z", "originalLanguage": {"id": 1, "name": "English"}, "ratings": {"votes": 100, "value": 8.5}, "statistics": {"seasonCount": 1, "episodeFileCount": 10, "episodeCount": 10, "totalEpisodeCount": 10, "sizeOnDisk": 1024, "percentOfEpisodes": 100.0}, "addOptions": {"ignoreEpisodesWithFiles": false, "ignoreEpisodesWithoutFiles": false, "monitor": "unknown", "searchForMissingEpisodes": false, "searchForCutOffUnmetEpisodes": false}},
-      "images": []
+      "series": #{SpecFixtures.series_json},
+      "images": [{"coverType": "screenshot", "url": "http://example.com/s.jpg"}]
     })
     ep = Sonarr::Model::EpisodeResource.from_json(json)
     ep.id.should eq(1)
@@ -52,7 +59,8 @@ describe Sonarr::Model::EpisodeResource do
     ep.unverified_scene_numbering.should eq(false)
     ep.end_time.should eq(Time.utc(2023, 1, 1, 14, 0, 0))
     ep.grab_date.should eq(Time.utc(2023, 1, 1, 15, 0, 0))
-    ep.series.id.should eq(2)
-    ep.images.should be_a(Array(Sonarr::Model::MediaCover))
+    present(ep.series).id.should eq(2)
+    ep.images.size.should eq(1)
+    ep.images.first.cover_type.should eq(Sonarr::MediaCoverTypes::Screenshot)
   end
-end 
+end

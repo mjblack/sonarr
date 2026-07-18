@@ -1,7 +1,14 @@
 require "../spec_helper"
 
 describe Sonarr::Model::LogResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (all properties optional)" do
+    log = Sonarr::Model::LogResource.from_json("{}")
+    log.id.should be_nil
+    log.time.should be_nil
+    log.message.should be_nil
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "time": "2023-01-01T12:00:00Z",
@@ -20,4 +27,4 @@ describe Sonarr::Model::LogResource do
     log.exception.should eq("Test exception")
     log.exception_type.should eq("System.Exception")
   end
-end 
+end

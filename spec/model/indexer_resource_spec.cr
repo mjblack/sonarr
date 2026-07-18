@@ -1,7 +1,15 @@
 require "../spec_helper"
 
 describe Sonarr::Model::IndexerResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (arrays default to empty)" do
+    indexer = Sonarr::Model::IndexerResource.from_json("{}")
+    indexer.id.should be_nil
+    indexer.fields.should be_empty
+    indexer.tags.should be_empty
+    indexer.protocol.should be_nil
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "name": "Test Indexer",
@@ -21,11 +29,12 @@ describe Sonarr::Model::IndexerResource do
     indexer.protocol.should eq(Sonarr::DownloadProtocol::Usenet)
     indexer.supports_rss.should eq(true)
     indexer.supports_search.should eq(true)
-    indexer.fields.should be_a(Array(Sonarr::Model::Field))
+    indexer.fields.size.should eq(1)
+    indexer.fields.first.name.should eq("apiKey")
     indexer.implementation_name.should eq("Newznab")
     indexer.implementation.should eq("Newznab")
     indexer.config_contract.should eq("NewznabSettings")
     indexer.info_link.should eq("http://example.com")
-    indexer.tags.should be_a(Array(Int32))
+    indexer.tags.should be_empty
   end
-end 
+end

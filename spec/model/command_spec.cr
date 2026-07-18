@@ -1,7 +1,14 @@
 require "../spec_helper"
 
 describe Sonarr::Model::Command do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (all properties optional)" do
+    cmd = Sonarr::Model::Command.from_json("{}")
+    cmd.name.should be_nil
+    cmd.trigger.should be_nil
+    cmd.last_execution_time.should be_nil
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "sendUpdatesToClient": true,
       "updateScheduledTask": false,
@@ -30,4 +37,4 @@ describe Sonarr::Model::Command do
     cmd.suppress_messages.should eq(false)
     cmd.client_user_agent.should eq("SpecAgent")
   end
-end 
+end

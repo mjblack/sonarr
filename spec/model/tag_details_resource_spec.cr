@@ -1,7 +1,15 @@
 require "../spec_helper"
 
 describe Sonarr::Model::TagDetailsResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (arrays default to empty)" do
+    tag = Sonarr::Model::TagDetailsResource.from_json("{}")
+    tag.id.should be_nil
+    tag.label.should be_nil
+    tag.series_ids.should be_empty
+    tag.indexer_ids.should be_empty
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "label": "Test Tag",
@@ -26,4 +34,4 @@ describe Sonarr::Model::TagDetailsResource do
     tag.auto_tag_ids.should eq([13, 14])
     tag.series_ids.should eq([15, 16])
   end
-end 
+end

@@ -1,7 +1,15 @@
 require "../spec_helper"
 
 describe Sonarr::Model::ImportListResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (arrays default to empty)" do
+    list = Sonarr::Model::ImportListResource.from_json("{}")
+    list.id.should be_nil
+    list.fields.should be_empty
+    list.tags.should be_empty
+    list.list_type.should be_nil
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "name": "Test Import List",
@@ -21,7 +29,8 @@ describe Sonarr::Model::ImportListResource do
     list.implementation_name.should eq("Plex Import")
     list.config_contract.should eq("PlexImportSettings")
     list.info_link.should eq("http://example.com")
-    list.fields.should be_a(Array(Sonarr::Model::Field))
-    list.tags.should be_a(Array(Int32))
+    list.fields.size.should eq(1)
+    list.fields.first.name.should eq("accessToken")
+    list.tags.should be_empty
   end
-end 
+end
