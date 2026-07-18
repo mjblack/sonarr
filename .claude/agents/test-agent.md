@@ -25,5 +25,8 @@ Goal: spin up a real Sonarr instance in Docker and validate the library’s requ
 - Integration specs go under `spec/integration/` and must be **opt-in** (guard with an env var like `SONARR_INTEGRATION=1` and/or spec tags) so `crystal spec` stays green offline. Skip gracefully with a clear message when the env/container is absent.
 - Cover: system/status, series CRUD, episode listing, quality profiles, tags, commands — whatever the running instance exposes without external indexers/downloaders.
 
+## Linting
+Run `bin/ameba` on your spec/harness code; it must pass (no new offenses) before you report done.
+
 ## Reporting
 Return: specs added/changed, coverage summary, harness commands to run integration tests, current `crystal spec` result, and any model defects you found (with file + schema reference) for the coordinator to route to the code-editor.

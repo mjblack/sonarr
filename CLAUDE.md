@@ -34,6 +34,7 @@ Model classes and enums are produced by a **schema-driven code generator** (a Cr
 - Install deps: `shards install`
 - Build check: `crystal build --no-codegen src/sonarr.cr`
 - Format: `crystal tool format` (check: `crystal tool format --check`)
+- Lint: `bin/ameba` (ameba is a development dependency; `shards install` builds `bin/ameba`)
 - Unit specs: `crystal spec` (must stay green offline)
 - Regenerate models: `crystal run tools/generate.cr`
 - Integration specs (opt-in, needs Docker): `SONARR_INTEGRATION=1 crystal spec` with the Sonarr test container up (see below).
