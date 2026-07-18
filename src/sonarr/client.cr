@@ -1,5 +1,4 @@
 class Sonarr::Client
-
   getter endpoint : URI
   @api_key : String
   @headers = {} of String => String
@@ -13,7 +12,7 @@ class Sonarr::Client
     @headers["Accept"] = "application/json"
     # @headers["Accept"] = "*/*"
     # @headers["User-Agent"] = "Sonarr Crystal Client"
-    @client = Crest::Resource.new(@endpoint.to_s, params: { "apikey" => @api_key }, headers: @headers)
+    @client = Crest::Resource.new(@endpoint.to_s, params: {"apikey" => @api_key}, headers: @headers)
   end
 
   def request(method : Symbol, path : String, params = {} of String => String)
@@ -57,5 +56,4 @@ class Sonarr::Client
       raise "Sonarr Client has not been initialized"
     end
   end
-
 end
