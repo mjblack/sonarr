@@ -1,0 +1,38 @@
+# Docker-driven integration test harness for the `sonarr` Crystal shard (Epic A / A6).
+#
+# Brings up a single linuxserver/sonarr instance with a DETERMINISTIC, pre-seeded
+# API key so the integration specs under spec/integration/ are reproducible.
+#
+# The API key is injected up front: scripts/sonarr-testenv.sh seeds a config.xml
+# containing a fixed <ApiKey> into the (ephemeral) config dir BEFORE the first
+# boot, so both the container and the specs agree on the key with no read-back.
+#
+# All tunables come from the environment (with defaults that match
+# spec/integration_helper.cr):
+#   SONARR_PORT        host port to publish        (default 8989)
+#   SONARR_CONFIG_DIR  host path bind-mounted at /config (default /tmp/sonarr-testenv-config)
+#   SONARR_PUID/PGID   ownership for the config dir (default 1000/1000)
+#   TZ                 container timezone           (default Etc/UTC)
+#
+# Usage is normally via scripts/sonarr-testenv.sh (up | wait | apikey | down),
+# which exports the matching env before invoking docker compose.
+
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr-testenv
+    environment:
+      - PUID=${SONARR_PUID:-1000}
+      - PGID=${SONARR_PGID:-1000}
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - ${SONARR_CONFIG_DIR:-/tmp/sonarr-testenv-config}:/config
+    ports:
+      - "${SONARR_PORT:-8989}:8989"
+    restart: "no"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8989/ping || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 20s
