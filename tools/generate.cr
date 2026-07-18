@@ -9,6 +9,7 @@
 
 require "json"
 require "file_utils"
+require "./endpoints"
 
 module Generator
   ROOT        = Path[__DIR__].parent
@@ -33,10 +34,12 @@ module Generator
   class Schema
     getter enums : Hash(String, JSON::Any)
     getter objects : Hash(String, JSON::Any)
+    getter paths : Hash(String, JSON::Any)
 
     def initialize(path : Path)
       doc = JSON.parse(File.read(path))
       schemas = doc["components"]["schemas"].as_h
+      @paths = doc["paths"].as_h
       @enums = {} of String => JSON::Any
       @objects = {} of String => JSON::Any
       schemas.each do |name, node|
@@ -223,9 +226,12 @@ module Generator
 
     File.write(ENUMS_PATH, emit_enums(schema))
 
-    format!(MODEL_DIR.to_s, ENUMS_PATH.to_s)
+    api_files = emit_endpoints(schema)
 
-    puts "Generated #{schema.objects.size} models and #{schema.enums.size} enums."
+    format!(MODEL_DIR.to_s, ENUMS_PATH.to_s, API_DIR.to_s)
+
+    puts "Generated #{schema.objects.size} models, #{schema.enums.size} enums, " \
+         "and #{api_files} endpoint modules."
   end
 
   def self.format!(*paths) : Nil
