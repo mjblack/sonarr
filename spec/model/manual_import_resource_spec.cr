@@ -1,7 +1,16 @@
 require "../spec_helper"
 
 describe Sonarr::Model::ManualImportResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (arrays default to empty)" do
+    import = Sonarr::Model::ManualImportResource.from_json("{}")
+    import.id.should be_nil
+    import.series.should be_nil
+    import.quality.should be_nil
+    import.episodes.should be_empty
+    import.rejections.should be_empty
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "path": "/path/to/file.mkv",
@@ -9,11 +18,11 @@ describe Sonarr::Model::ManualImportResource do
       "folderName": "Test Folder",
       "name": "Test File",
       "size": 123456,
-      "series": {"id": 2, "title": "Test Series", "status": "continuing", "ended": false, "year": 2020, "qualityProfileId": 1, "seasonFolder": true, "monitored": true, "monitorNewItems": "all", "useSceneNumbering": false, "runtime": 45, "tvdbId": 12345, "tvRageId": 67890, "tvMazeId": 11111, "tmdbId": 22222, "seriesType": "standard", "added": "2020-01-01T12:00:00Z", "originalLanguage": {"id": 1, "name": "English"}, "ratings": {"votes": 100, "value": 8.5}, "statistics": {"seasonCount": 1, "episodeFileCount": 10, "episodeCount": 10, "totalEpisodeCount": 10, "sizeOnDisk": 1024, "percentOfEpisodes": 100.0}, "addOptions": {"ignoreEpisodesWithFiles": false, "ignoreEpisodesWithoutFiles": false, "monitor": "unknown", "searchForMissingEpisodes": false, "searchForCutOffUnmetEpisodes": false}},
-      "episodes": [{"id": 3, "seriesId": 2, "tvdbId": 3, "episodeFileId": 4, "seasonNumber": 1, "episodeNumber": 2, "title": "Pilot", "airDate": "2023-01-01", "airDateUtc": "2023-01-01T12:00:00Z", "runtime": 45, "hasFile": true, "monitored": true}],
-      "quality": {"quality": {"id": 1, "name": "HDTV", "source": "web", "resolution": 1080}, "revision": {"version": 1, "real": 0, "isRepack": false}},
-      "languages": [],
-      "rejections": []
+      "series": #{SpecFixtures.series_json},
+      "episodes": [#{SpecFixtures.episode_json}],
+      "quality": #{SpecFixtures.quality_model_json},
+      "languages": [{"id": 1, "name": "English"}],
+      "rejections": [{"type": "permanent", "reason": "bad"}]
     })
     import = Sonarr::Model::ManualImportResource.from_json(json)
     import.id.should eq(1)
@@ -22,10 +31,11 @@ describe Sonarr::Model::ManualImportResource do
     import.folder_name.should eq("Test Folder")
     import.name.should eq("Test File")
     import.size.should eq(123456)
-    import.series.should be_a(Sonarr::Model::SeriesResource)
-    import.episodes.should be_a(Array(Sonarr::Model::EpisodeResource))
-    import.quality.quality.id.should eq(1)
-    import.languages.should be_a(Array(Sonarr::Model::Language))
-    import.rejections.should be_a(Array(Sonarr::Model::ImportRejectionResource))
+    present(import.series).id.should eq(2)
+    import.episodes.size.should eq(1)
+    present(present(import.quality).quality).id.should eq(1)
+    import.languages.size.should eq(1)
+    import.rejections.size.should eq(1)
+    import.rejections.first.type_field.should eq(Sonarr::RejectionType::Permanent)
   end
-end 
+end

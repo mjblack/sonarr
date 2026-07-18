@@ -1,16 +1,25 @@
 require "../spec_helper"
 
 describe Sonarr::Model::ManualImportReprocessResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (arrays default to empty)" do
+    import = Sonarr::Model::ManualImportReprocessResource.from_json("{}")
+    import.id.should be_nil
+    import.quality.should be_nil
+    import.episodes.should be_empty
+    import.episode_ids.should be_empty
+    import.rejections.should be_empty
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "path": "/path/to/file.mkv",
       "seriesId": 2,
       "seasonNumber": 1,
-      "episodes": [{"id": 3, "seriesId": 2, "tvdbId": 3, "episodeFileId": 4, "seasonNumber": 1, "episodeNumber": 2, "title": "Pilot", "airDate": "2023-01-01", "airDateUtc": "2023-01-01T12:00:00Z", "runtime": 45, "hasFile": true, "monitored": true}],
+      "episodes": [#{SpecFixtures.episode_json}],
       "episodeIds": [3],
-      "quality": {"quality": {"id": 1, "name": "HDTV", "source": "web", "resolution": 1080}, "revision": {"version": 1, "real": 0, "isRepack": false}},
-      "languages": [],
+      "quality": #{SpecFixtures.quality_model_json},
+      "languages": [{"id": 1, "name": "English"}],
       "releaseGroup": "TestGroup",
       "downloadId": "download123",
       "customFormats": [],
@@ -24,16 +33,16 @@ describe Sonarr::Model::ManualImportReprocessResource do
     import.path.should eq("/path/to/file.mkv")
     import.series_id.should eq(2)
     import.season_number.should eq(1)
-    import.episodes.should be_a(Array(Sonarr::Model::EpisodeResource))
+    import.episodes.size.should eq(1)
     import.episode_ids.should eq([3])
-    import.quality.quality.id.should eq(1)
-    import.languages.should be_a(Array(Sonarr::Model::Language))
+    present(present(import.quality).quality).id.should eq(1)
+    import.languages.size.should eq(1)
     import.release_group.should eq("TestGroup")
     import.download_id.should eq("download123")
-    import.custom_formats.should be_a(Array(Sonarr::Model::CustomFormatResource))
+    import.custom_formats.should be_empty
     import.custom_format_score.should eq(0)
     import.indexer_flags.should eq(0)
     import.release_type.should eq(Sonarr::ReleaseType::Unknown)
-    import.rejections.should be_a(Array(Sonarr::Model::ImportRejectionResource))
+    import.rejections.should be_empty
   end
-end 
+end

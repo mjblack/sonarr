@@ -1,7 +1,15 @@
 require "../spec_helper"
 
 describe Sonarr::Model::EpisodeFileResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (arrays default to empty)" do
+    file = Sonarr::Model::EpisodeFileResource.from_json("{}")
+    file.id.should be_nil
+    file.quality.should be_nil
+    file.languages.should be_empty
+    file.custom_formats.should be_empty
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "seriesId": 2,
@@ -9,8 +17,8 @@ describe Sonarr::Model::EpisodeFileResource do
       "relativePath": "S01E02.mkv",
       "size": 123456,
       "dateAdded": "2023-01-01T12:00:00Z",
-      "quality": {"quality": {"id": 1, "name": "HDTV", "source": "web", "resolution": 1080}, "revision": {"version": 1, "real": 0, "isRepack": false}},
-      "languages": [],
+      "quality": #{SpecFixtures.quality_model_json},
+      "languages": [{"id": 1, "name": "English"}],
       "customFormats": [],
       "customFormatScore": 0,
       "releaseType": "unknown",
@@ -24,18 +32,19 @@ describe Sonarr::Model::EpisodeFileResource do
     file.relative_path.should eq("S01E02.mkv")
     file.size.should eq(123456)
     file.date_added.should eq(Time.utc(2023, 1, 1, 12, 0, 0))
-    file.quality.quality.id.should eq(1)
-    file.quality.quality.name.should eq("HDTV")
-    file.quality.quality.source.should eq(Sonarr::QualitySource::Web)
-    file.quality.quality.resolution.should eq(1080)
-    file.quality.revision.version.should eq(1)
-    file.quality.revision.real.should eq(0)
-    file.quality.revision.is_repack?.should eq(false)
-    file.languages.should be_a(Array(Sonarr::Model::Language))
-    file.custom_formats.should be_a(Array(Sonarr::Model::CustomFormatResource))
+    quality = present(file.quality)
+    present(quality.quality).id.should eq(1)
+    present(quality.quality).name.should eq("HDTV")
+    present(quality.quality).source.should eq(Sonarr::QualitySource::Web)
+    present(quality.quality).resolution.should eq(1080)
+    present(quality.revision).version.should eq(1)
+    present(quality.revision).real.should eq(0)
+    present(quality.revision).is_repack.should eq(false)
+    file.languages.size.should eq(1)
+    file.custom_formats.should be_empty
     file.custom_format_score.should eq(0)
     file.release_type.should eq(Sonarr::ReleaseType::Unknown)
     file.media_info.should be_a(Sonarr::Model::MediaInfoResource)
     file.quality_cutoff_not_met.should eq(false)
   end
-end 
+end

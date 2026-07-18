@@ -1,13 +1,18 @@
 require "../spec_helper"
 
 describe Sonarr::Model::SelectOption do
-  it "parses JSON with all required fields" do
-    json = %({
-      "value": "option1",
-      "name": "Option 1"
-    })
-    opt = Sonarr::Model::SelectOption.from_json(json)
-    opt.value.should eq("option1")
-    opt.name.should eq("Option 1")
+  it "parses an empty object (all properties optional)" do
+    opt = Sonarr::Model::SelectOption.from_json("{}")
+    opt.value.should be_nil
+    opt.name.should be_nil
   end
-end 
+
+  it "parses a fully-populated object" do
+    json = %({"value": 1, "name": "Option 1", "order": 2, "hint": "a hint"})
+    opt = Sonarr::Model::SelectOption.from_json(json)
+    opt.value.should eq(1)
+    opt.name.should eq("Option 1")
+    opt.order.should eq(2)
+    opt.hint.should eq("a hint")
+  end
+end

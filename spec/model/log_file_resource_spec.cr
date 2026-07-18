@@ -1,7 +1,14 @@
 require "../spec_helper"
 
 describe Sonarr::Model::LogFileResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (all properties optional)" do
+    log = Sonarr::Model::LogFileResource.from_json("{}")
+    log.id.should be_nil
+    log.filename.should be_nil
+    log.last_write_time.should be_nil
+  end
+
+  it "parses a fully-populated object" do
     json = %({
       "id": 1,
       "filename": "sonarr.log",
@@ -16,4 +23,4 @@ describe Sonarr::Model::LogFileResource do
     log.contents_url.should eq("/api/v3/log/file/contents")
     log.download_url.should eq("/api/v3/log/file/download")
   end
-end 
+end

@@ -1,7 +1,15 @@
 require "../spec_helper"
 
 describe Sonarr::Model::SeriesStatisticsResource do
-  it "parses JSON with all required fields" do
+  it "parses an empty object (all properties optional)" do
+    stats = Sonarr::Model::SeriesStatisticsResource.from_json("{}")
+    stats.season_count.should be_nil
+    stats.episode_count.should be_nil
+    stats.release_groups.should be_empty
+  end
+
+  # seasonCount is unique to the *series* statistics shape.
+  it "parses a fully-populated object" do
     json = %({
       "seasonCount": 2,
       "episodeFileCount": 20,
@@ -18,4 +26,4 @@ describe Sonarr::Model::SeriesStatisticsResource do
     stats.size_on_disk.should eq(2048)
     stats.percent_of_episodes.should eq(90.0)
   end
-end 
+end
