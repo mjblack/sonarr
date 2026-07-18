@@ -6,5 +6,5 @@ class Sonarr::Model::LocalizationResource < Sonarr::Model
   property id : Int32?
 
   @[JSON::Field(key: "strings", emit_null: true)]
-  property strings : Hash(String, String)?
+  property strings : Hash(String, String?)?
 end

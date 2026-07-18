@@ -39,7 +39,7 @@ class Sonarr::Model::HistoryResource < Sonarr::Model
   property event_type : Sonarr::EpisodeHistoryEventType?
 
   @[JSON::Field(key: "data", emit_null: true)]
-  property data : Hash(String, String)?
+  property data : Hash(String, String?)?
 
   @[JSON::Field(key: "episode", emit_null: true)]
   property episode : Sonarr::Model::EpisodeResource?

@@ -92,8 +92,7 @@ module Generator
     type = h["type"]?.try(&.as_s)
     case type
     when "array"
-      item = resolve(schema, h["items"])
-      Resolved.new("Array(#{item.expr})", array: true)
+      Resolved.new("Array(#{value_expr(schema, h["items"])})", array: true)
     when "object"
       Resolved.new(hash_type(schema, h["additionalProperties"]?))
     when "string"
@@ -124,11 +123,23 @@ module Generator
   def self.hash_type(schema : Schema, additional : JSON::Any?) : String
     value =
       if additional && (ah = additional.as_h?) && !ah.empty?
-        resolve(schema, additional).expr
+        value_expr(schema, additional)
       else
         "JSON::Any"
       end
     "Hash(String, #{value})"
+  end
+
+  # Crystal type expr for a nested value node (Hash value / Array item),
+  # honoring `nullable: true` so nested nullable primitives become `T?`.
+  # (Property-level nullability only masks this for top-level properties.)
+  def self.value_expr(schema : Schema, node : JSON::Any) : String
+    expr = resolve(schema, node).expr
+    if (h = node.as_h?) && h["nullable"]? == JSON::Any.new(true)
+      "#{expr}?"
+    else
+      expr
+    end
   end
 
   # ---- emitters -------------------------------------------------------------

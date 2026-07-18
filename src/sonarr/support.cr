@@ -72,11 +72,19 @@ module Sonarr
       end
 
       # Parses a schema value, falling back to Crystal's lenient enum parsing.
+      # Unknown values are surfaced as `JSON::ParseException` for consistency
+      # with the rest of JSON deserialization (Crystal's `parse` raises
+      # `ArgumentError`).
       def self.from_sonarr_value(string : String) : self
         {% for member, value in members %}
         return {{name.id}}::{{member.id}} if string == {{value}}
         {% end %}
-        parse(string)
+        begin
+          parse(string)
+        rescue ArgumentError
+          raise JSON::ParseException.new(
+            "Unknown {{name.id}} value: #{string.inspect}", 0, 0)
+        end
       end
 
       def self.new(pull : JSON::PullParser) : self
