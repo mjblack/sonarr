@@ -1,0 +1,13 @@
+name: sonarr
+version: 0.1.0
+
+authors:
+  - Matthew J. Black <mjblack@gmail.com>
+
+crystal: '>= 1.16.3'
+
+license: MIT
+
+dependencies:
+  crest:
+    github: mamantoha/crest

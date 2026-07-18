@@ -1,0 +1,24 @@
+class Sonarr::Model::HttpUri < Sonarr::Model
+
+  @[JSON::Field(key: "fullUri", emit_null: true)]
+  property full_uri : String?
+
+  @[JSON::Field(key: "scheme", emit_null: true)]
+  property scheme : String?
+
+  @[JSON::Field(key: "host", emit_null: true)]
+  property host : String?
+
+  @[JSON::Field(key: "port", emit_null: true)]
+  property port : Int32?
+
+  @[JSON::Field(key: "path", emit_null: true)]
+  property path : String?
+
+  @[JSON::Field(key: "query", emit_null: true)]
+  property query : String?
+
+  @[JSON::Field(key: "fragment", emit_null: true)]
+  property fragment : String?
+
+end

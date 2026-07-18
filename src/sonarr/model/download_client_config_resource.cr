@@ -1,0 +1,18 @@
+class Sonarr::Model::DownloadClientConfigResource < Sonarr::Model
+
+  @[JSON::Field(key: "id")]
+  property id : Int32
+
+  @[JSON::Field(key: "downloadClientWorkingFolders", emit_null: true)]
+  property download_client_working_folders : String?
+
+  @[JSON::Field(key: "enableCompletedDownloadHandling")]
+  property enable_completed_download_handling : Bool
+
+  @[JSON::Field(key: "autoRedownloadFailed")]
+  property auto_redownload_failed : Bool
+
+  @[JSON::Field(key: "autoRedownloadFailedFromInteractiveSearch")]
+  property auto_redownload_failed_from_interactive_search : Bool
+
+end

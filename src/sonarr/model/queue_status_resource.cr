@@ -1,0 +1,27 @@
+class Sonarr::Model::QueueStatusResource < Sonarr::Model
+
+  @[JSON::Field(key: "id")]
+  property id : Int32
+
+  @[JSON::Field(key: "totalCount")]
+  property total_count : Int32
+
+  @[JSON::Field(key: "count")]
+  property count : Int32
+
+  @[JSON::Field(key: "unknownCount")]
+  property unknown_count : Int32
+
+  @[JSON::Field(key: "errors")]
+  property errors : Bool
+
+  @[JSON::Field(key: "warnings")]
+  property warnings : Bool
+
+  @[JSON::Field(key: "unknownErrors")]
+  property unknown_errors : Bool
+
+  @[JSON::Field(key: "unknownWarnings")]
+  property unknown_warnings : Bool
+
+end

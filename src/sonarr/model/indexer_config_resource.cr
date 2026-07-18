@@ -1,0 +1,18 @@
+class Sonarr::Model::IndexerConfigResource < Sonarr::Model
+
+  @[JSON::Field(key: "id")]
+  property id : Int32
+
+  @[JSON::Field(key: "minimumAge")]
+  property minimum_age : Int32
+
+  @[JSON::Field(key: "retention")]
+  property retention : Int32
+
+  @[JSON::Field(key: "maximumSize")]
+  property maximum_size : Int32
+
+  @[JSON::Field(key: "rssSyncInterval")]
+  property rss_sync_interval : Int32
+
+end
