@@ -23,9 +23,14 @@
 module Generator
   API_DIR = ROOT / "src" / "sonarr" / "api"
 
-  # Groups (schema `tags`) generated in the B2 pilot. B3 fans this out to all
-  # groups; set to `nil` there to emit every group.
-  PILOT_GROUPS = %w[Tag Queue History]
+  # Groups (schema `tags`) that are NOT JSON APIs and are excluded wholesale:
+  #   * StaticResource — HTML/static assets and the catch-all `{path}` routes.
+  #   * MediaCover      — returns raw image bytes, not JSON.
+  #   * CalendarFeed    — an iCal (`text/calendar`) feed.
+  # This is an explicit safety net; the content-type / catch-all rules in
+  # `exclusion_reason` catch these (and any future non-JSON operations) on their
+  # own merits, so no operation is ever dropped silently.
+  NON_JSON_GROUPS = %w[StaticResource MediaCover CalendarFeed]
 
   # A single API operation, resolved from the schema.
   record Operation,
@@ -34,17 +39,31 @@ module Generator
     name : String,
     node : JSON::Any
 
+  # An operation that was intentionally skipped, with the reason (for logging).
+  record Exclusion,
+    group : String,
+    verb : String,
+    path : String,
+    reason : String
+
   # ---- driver ---------------------------------------------------------------
 
-  # Emits one file per pilot group; prunes stale files. Returns the count.
+  # Emits one file per emittable group; prunes stale files. Logs every excluded
+  # operation. Returns the count of modules written.
   def self.emit_endpoints(schema : Schema) : Int32
     FileUtils.mkdir_p(API_DIR)
 
-    grouped = operations_by_group(schema)
-    expected = Set(String).new
+    grouped, excluded = operations_by_group(schema)
 
+    unless excluded.empty?
+      puts "Excluded #{excluded.size} operation(s) (non-JSON / catch-all):"
+      excluded.each do |ex|
+        puts "  - #{ex.group} #{ex.verb.upcase} #{ex.path} — #{ex.reason}"
+      end
+    end
+
+    expected = Set(String).new
     grouped.keys.sort!.each do |group|
-      next unless PILOT_GROUPS.nil? || PILOT_GROUPS.includes?(group)
       file = "#{snake_case(group)}.cr"
       expected << file
       File.write(API_DIR / file, emit_group(schema, group, grouped[group]))
@@ -58,9 +77,13 @@ module Generator
     expected.size
   end
 
-  # Collects operations keyed by schema tag, with unique method names per group.
-  def self.operations_by_group(schema : Schema) : Hash(String, Array(Operation))
+  # Collects emittable operations keyed by schema tag, with unique method names
+  # per group. Non-JSON / catch-all operations are filtered out (and returned in
+  # the second tuple element so the caller can report them); a group with zero
+  # emittable operations is dropped entirely.
+  def self.operations_by_group(schema : Schema) : {Hash(String, Array(Operation)), Array(Exclusion)}
     grouped = Hash(String, Array(Operation)).new { |hash, key| hash[key] = [] of Operation }
+    excluded = [] of Exclusion
 
     # Deterministic order: sort by path, then by a fixed verb order.
     verb_order = %w[get post put delete]
@@ -71,8 +94,15 @@ module Generator
         op = verbs[verb]
         tags = op["tags"]?.try(&.as_a.map(&.as_s)) || [] of String
         group = tags.first? || "Default"
+
+        if reason = exclusion_reason(group, path, op)
+          excluded << Exclusion.new(group, verb, path, reason)
+          next
+        end
+
         base = method_name(verb, path)
-        # De-duplicate within a group (belt-and-braces; the pilot has none).
+        # De-duplicate within a group (last-resort backstop; the ends-in-param
+        # naming rule below yields zero collisions on the current schema).
         existing = grouped[group].map(&.name)
         name = base
         suffix = 2
@@ -84,12 +114,58 @@ module Generator
       end
     end
 
-    grouped
+    {grouped, excluded}
+  end
+
+  # ---- exclusion (non-JSON / catch-all) -------------------------------------
+
+  # Returns why an operation should be skipped, or nil if it is emittable.
+  # Principled: a catch-all/regex `{path}` route, or a request/response body
+  # whose only content type is non-JSON (image, iCal, HTML, octet-stream,
+  # multipart, …), is not a typed JSON endpoint. The named-group list is a
+  # belt-and-braces safety net over the same intent.
+  def self.exclusion_reason(group : String, path : String, op : JSON::Any) : String?
+    return "excluded non-JSON group (#{group})" if NON_JSON_GROUPS.includes?(group)
+    return "catch-all/regex `{path}` route" if path.includes?("{path}")
+    return "non-JSON request body" if request_non_json?(op)
+    return "non-JSON response body" if response_non_json?(op)
+    nil
+  end
+
+  # True when a media type carries a JSON representation (`application/json`,
+  # `text/json`, `application/*+json`, …).
+  def self.json_content?(content_type : String) : Bool
+    content_type.includes?("json")
+  end
+
+  # True when a request body is declared but no JSON representation is offered.
+  def self.request_non_json?(op : JSON::Any) : Bool
+    content = op.dig?("requestBody", "content").try(&.as_h)
+    return false if content.nil? || content.empty?
+    content.keys.none? { |content_type| json_content?(content_type) }
+  end
+
+  # True when any response declares content but none of it is JSON.
+  def self.response_non_json?(op : JSON::Any) : Bool
+    responses = op["responses"]?.try(&.as_h) || {} of String => JSON::Any
+    responses.each_value do |resp|
+      content = resp.dig?("content").try(&.as_h)
+      next if content.nil? || content.empty?
+      return true if content.keys.none? { |content_type| json_content?(content_type) }
+    end
+    false
   end
 
   # ---- naming ---------------------------------------------------------------
 
   # Derives a Crystal method name from verb + path (no operationId exists).
+  #
+  # GET disambiguation (B3 must-fix): a GET whose path ENDS IN A PATH PARAM
+  # fetches a single item (`get`); otherwise it returns a collection (`list`).
+  # This decides at every nesting level, not just the top one, so sibling
+  # collection/item routes (`GET /config/host` → `list_host`,
+  # `GET /config/host/{id}` → `get_host`) no longer collide. The static tail
+  # segments are always appended, keeping names meaningful and unique.
   def self.method_name(verb : String, path : String) : String
     segments = path.split('/').reject(&.empty?)
     segments = segments.reject { |seg| seg == "api" || /\Av\d+\z/.matches?(seg) }
@@ -97,11 +173,11 @@ module Generator
     resource = segments.first?
     tail = resource ? segments[1..] : segments
     static_tail = tail.reject(&.starts_with?('{'))
-    has_param = path.includes?('{')
+    ends_in_param = segments.last?.try(&.starts_with?('{')) || false
 
     action =
       case verb
-      when "get"    then (static_tail.empty? && !has_param) ? "list" : "get"
+      when "get"    then ends_in_param ? "get" : "list"
       when "post"   then "create"
       when "put"    then "update"
       when "delete" then "delete"
@@ -200,16 +276,41 @@ module Generator
 
   def self.param_of(schema : Schema, node : JSON::Any) : Param
     key = node["name"].as_s
-    Param.new(key, property_name(key), resolve(schema, node["schema"]).expr)
+    type = resolve(schema, node["schema"]).expr
+
+    # Approved B3 deviation: normalize path `id`-style params to Int32 for
+    # caller ergonomics. The schema declares some `{id}` path params as `string`
+    # (e.g. PUT /tag/{id}) and others as int32; unifying them to Int32 is
+    # wire-safe because URL interpolation only calls `#to_s`. This applies to
+    # PATH params only — query and body types stay strictly schema-faithful.
+    if node["in"]? == JSON::Any.new("path") && id_path_param?(key)
+      type = "Int32"
+    end
+
+    Param.new(key, property_name(key), type)
+  end
+
+  # A path param that names a numeric identifier (`id`, `seriesId`, `episodeId`,
+  # …). Filenames and free-text names are unaffected.
+  def self.id_path_param?(key : String) : Bool
+    key.downcase.ends_with?("id")
   end
 
   # Request body Crystal type (from the JSON content schema), or nil if none.
   def self.request_body_type(schema : Schema, op : JSON::Any) : String?
     content = op.dig?("requestBody", "content").try(&.as_h)
     return nil unless content
-    media = content["application/json"]? || content.first_value
+    media = json_media(content)
     node = media["schema"]?
     node ? resolve(schema, node).expr : nil
+  end
+
+  # Picks the JSON media object from a content map, preferring `application/json`
+  # and falling back to any JSON-ish type, then the first entry.
+  def self.json_media(content : Hash(String, JSON::Any)) : JSON::Any
+    content["application/json"]? ||
+      content.find { |content_type, _| json_content?(content_type) }.try(&.last) ||
+      content.first_value
   end
 
   # The 200/201 response: :many (array), :one (`$ref`), or :none (no content).
@@ -222,7 +323,7 @@ module Generator
       return {kind: :none, type: "Nil", return: "Nil"}
     end
 
-    media = content["application/json"]? || content.first_value
+    media = json_media(content)
     node = media["schema"]
 
     if node["type"]? == JSON::Any.new("array")
