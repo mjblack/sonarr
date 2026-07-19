@@ -216,6 +216,13 @@ module Generator
     expected = Set(String).new
 
     schema.objects.keys.sort!.each do |name|
+      # `HttpUri` is a schema/wire-format mismatch the generic object emitter
+      # can't express: the schema declares an object, but live Sonarr sends a
+      # plain URL string. It is provided by the hand-written, string-backed
+      # `src/sonarr/support_http_uri.cr` instead — skip it here (and let the
+      # cleanup below remove any previously generated `model/http_uri.cr`).
+      next if name == "HttpUri"
+
       file = "#{snake_case(name)}.cr"
       expected << file
       File.write(MODEL_DIR / file, emit_model(schema, name))
@@ -233,7 +240,7 @@ module Generator
 
     format!(MODEL_DIR.to_s, ENUMS_PATH.to_s, API_DIR.to_s)
 
-    puts "Generated #{schema.objects.size} models, #{schema.enums.size} enums, " \
+    puts "Generated #{expected.size} models, #{schema.enums.size} enums, " \
          "and #{api_files} endpoint modules."
   end
 
