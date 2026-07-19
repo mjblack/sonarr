@@ -12,17 +12,14 @@ It provides:
   exact `camelCase` string values the Sonarr API expects.
 - A small **HTTP client** (`Sonarr::Client`) wrapping [`crest`](https://github.com/mamantoha/crest)
   that handles the base URL and `X-Api-Key` header for you.
+- **Generated typed endpoints** (`Sonarr::Api::*`) — one class per API group
+  (e.g. `Sonarr::Api::Series`, `Sonarr::Api::Tag`), each with methods that
+  issue the request and return already-deserialized models, so you don't have
+  to call the generic client and parse JSON by hand.
 
-Models and enums are generated from `ext/schema.json` (Sonarr's own OpenAPI
-document) rather than hand-written — see [Model generation](#model-generation)
-below.
-
-**Status:** the HTTP client currently only exposes generic
-`get`/`post`/`put`/`delete` methods — there are no typed, per-endpoint methods
-(e.g. no `client.series` or `client.system_status`) yet. Typed endpoint
-methods built on top of the generated models are planned (see the project's
-Epic B). Until then, you call the generic client and deserialize the response
-body into the model you want yourself, as shown below.
+Models, enums, and endpoints are all generated from `ext/schema.json`
+(Sonarr's own OpenAPI document) rather than hand-written — see
+[Generation](#generation) below.
 
 ## Installation
 
@@ -45,13 +42,109 @@ require "sonarr"
 
 # Sonarr::Client is a singleton: `.new` configures the shared instance and
 # also returns it.
-Sonarr::Client.new("http://localhost:8989", "APIKEY")
+client = Sonarr::Client.new("http://localhost:8989", "APIKEY")
+```
 
-# Generic HTTP verbs are available both on the instance and as class methods
-# on Sonarr::Client (they proxy to the singleton instance).
+### Typed endpoints
+
+For every API group in the schema there's a `Sonarr::Api::<Group>` class:
+construct it with the `Sonarr::Client` instance, then call a method — no
+manual path-building or JSON parsing required. Methods return already
+deserialized models (or `nil`/`[]` for empty/204 bodies).
+
+System status:
+
+```crystal
+status = Sonarr::Api::System.new(client).list_status # => Sonarr::Model::SystemResource?
+```
+
+Since every model is nilable-by-default (mirroring the schema, which marks
+almost nothing as strictly required), always guard against `nil` before using
+a field:
+
+```crystal
+if version = status.try(&.version)
+  puts "Sonarr #{version}"
+end
+```
+
+Tag CRUD (`list` / `get(id)` / `create(body)` / `update(id, body)` / `delete(id)`):
+
+```crystal
+tags = Sonarr::Api::Tag.new(client)
+all  = tags.list # => Array(Sonarr::Model::TagResource)
+
+# Models have no keyword constructor (they're built for JSON round-tripping),
+# so build one via #from_json and adjust properties as needed.
+new_tag = Sonarr::Model::TagResource.from_json(%({"label": "4k"}))
+created = tags.create(new_tag) # => Sonarr::Model::TagResource?
+
+if id = created.try(&.id)
+  fetched = tags.get(id) # => Sonarr::Model::TagResource?
+  tags.delete(id)        # => Nil
+end
+```
+
+A paged endpoint, e.g. the download queue — note this returns a
+`*PagingResource` wrapper, not a bare array (see [Caveats](#caveats)):
+
+```crystal
+page = Sonarr::Api::Queue.new(client).list(page: 1, page_size: 25)
+page.try(&.records) # => Array(Sonarr::Model::QueueResource)
+```
+
+#### Naming convention
+
+`Sonarr::Api::<Group>` names come straight from the schema's path tags (e.g.
+`/api/v3/tag` → `Sonarr::Api::Tag`); there are 66 groups covering the schema's
+162 documented paths. Within a group, method names follow the HTTP verb and
+path shape:
+
+- `list` — `GET` on the collection path (e.g. `GET /api/v3/tag`).
+- `get(id)` — `GET` on the collection path with an `/{id}` tail.
+- `create(body)` — `POST` on the collection path.
+- `update(id, body)` — `PUT` on the `/{id}` path.
+- `delete(id)` — `DELETE` on the `/{id}` path.
+- A sub-path tail becomes a suffix: `GET /api/v3/history/since` →
+  `list_since`, `GET /api/v3/history/series` → `list_series`.
+- Endpoints that don't fit the CRUD shape (no request body, or a verb-like
+  path segment) are named after the verb: `POST /api/v3/system/restart` →
+  `create_restart`, `POST /api/v3/system/shutdown` → `create_shutdown`.
+
+Optional query parameters (filters, paging, `includeXxx` flags) are exposed
+as keyword arguments in schema order, e.g. `Sonarr::Api::Series#list(tvdb_id:
+nil, include_season_images: nil)`.
+
+#### Caveats
+
+- **Paged endpoints return a wrapper, not a bare array.** Endpoints whose
+  schema response is a `*PagingResource` (queue, history, blocklist, log,
+  missing, cutoff, import list exclusions) return that wrapper type — access
+  the actual items via its `records` property, plus `page`, `pageSize`, and
+  `totalRecords`. Unpaged list endpoints (e.g. `Sonarr::Api::Tag#list`,
+  `Sonarr::Api::Series#list`) return a plain `Array(T)`.
+- **A few endpoints are RPC-style, not CRUD.** Their method names are
+  verb-derived rather than `list`/`get`/`create`/`update`/`delete` — e.g.
+  `Sonarr::Api::System#create_restart`, `#create_shutdown`.
+- **Some endpoints return no body** (`Nil`) — `delete` methods, and RPC-style
+  actions like the ones above.
+- **A handful of non-JSON paths are intentionally not generated**, since
+  there's no JSON schema to type against: the calendar iCal feed
+  (`/feed/v3/calendar/sonarr.ics`) and media cover images
+  (`/api/v3/mediacover/{seriesId}/{filename}`). Use the
+  [generic client](#generic-client) for those.
+
+### Generic client
+
+The lower-level `get`/`post`/`put`/`delete` methods that the typed endpoints
+above are built on remain available directly, both on the instance and as
+class methods on `Sonarr::Client` (which proxy to the singleton instance),
+for anything not (yet) covered by a typed endpoint:
+
+```crystal
 body = Sonarr::Client.get("api/v3/system/status")
 
-# Deserialize the response body into a generated model.
+# Deserialize the response body into a generated model yourself.
 status = Sonarr::Model::SystemResource.from_json(body)
 status.app_name  # => "Sonarr"
 status.version   # => "4.0.x.xxxx"
@@ -65,16 +158,6 @@ automatically. For example, listing series:
 ```crystal
 body   = Sonarr::Client.get("api/v3/series")
 series = Array(Sonarr::Model::SeriesResource).from_json(body)
-```
-
-Since every model is nilable-by-default (mirroring the schema, which marks
-almost nothing as strictly required), always guard against `nil` before using
-a field:
-
-```crystal
-if version = status.version
-  puts "Sonarr #{version}"
-end
 ```
 
 ### Enums
@@ -97,19 +180,22 @@ status.database_type.try(&.to_sonarr_value) # => "sqLite"
 - Format code: `crystal tool format` (check only: `crystal tool format --check`)
 - Lint: `bin/ameba` (built by `shards install` as a development dependency)
 
-## Model generation
+## Generation
 
-Model classes (`src/sonarr/model/*.cr`) and enums (`src/sonarr/support_enums.cr`)
-are **generated, not hand-written**, from `ext/schema.json` — Sonarr's own
-OpenAPI 3.0.0 document. The generator lives at `tools/generate.cr`.
+Model classes (`src/sonarr/model/*.cr`), enums (`src/sonarr/support_enums.cr`),
+and typed endpoints (`src/sonarr/api/*.cr`) are all **generated, not
+hand-written**, from `ext/schema.json` — Sonarr's own OpenAPI 3.0.0 document.
+The generator lives at `tools/generate.cr`; endpoints are built from the
+document's `paths`, one `Sonarr::Api::<Group>` class per path tag/group.
 
 ```sh
 crystal run tools/generate.cr
 ```
 
-This (re)writes every `src/sonarr/model/<snake_name>.cr` file and the whole
-of `src/sonarr/support_enums.cr`. Generation is deterministic and idempotent:
-running it twice against the same schema produces no git diff.
+This single command (re)writes every `src/sonarr/model/<snake_name>.cr` file,
+the whole of `src/sonarr/support_enums.cr`, and every `src/sonarr/api/<snake_name>.cr`
+file. Generation is deterministic and idempotent: running it twice against
+the same schema produces no git diff.
 
 To pick up a new Sonarr API version, drop the updated OpenAPI document in
 place as `ext/schema.json` and regenerate:
@@ -119,11 +205,11 @@ cp /path/to/new/schema.json ext/schema.json
 crystal run tools/generate.cr
 ```
 
-Do not hand-edit files under `src/sonarr/model/` or `src/sonarr/support_enums.cr`
-— they carry an `AUTO-GENERATED ... DO NOT EDIT` header. If a generated file
-needs fixing, fix the generator and regenerate. Genuine per-model
-customization belongs in a separate file that reopens the class, never inside
-a generated file.
+Do not hand-edit files under `src/sonarr/model/`, `src/sonarr/support_enums.cr`,
+or `src/sonarr/api/` — they carry an `AUTO-GENERATED ... DO NOT EDIT` header.
+If a generated file needs fixing, fix the generator and regenerate. Genuine
+per-model or per-endpoint customization belongs in a separate file that
+reopens the class, never inside a generated file.
 
 ## Docker integration tests
 
