@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-18
+
 Epic A: bring the model layer into full compliance with the Sonarr v3 OpenAPI
 schema (`ext/schema.json`), and add a repeatable integration test harness.
 
@@ -65,4 +67,12 @@ verbs and deserialize responses by hand.
 - `date-time`-typed properties are typed as `Time` (via `Sonarr::TimeConverter`)
   instead of `String`.
 
-[Unreleased]: https://github.com/mjblack/sonarr/compare/25d2918...HEAD
+### Fixed
+
+- Models now omit nil fields on serialize instead of emitting `null`, which
+  Sonarr rejected on POST/PUT. (#26)
+- `HttpUri` now deserializes from Sonarr's string wire format (it was typed as
+  an object per the schema, which broke `Api::Health#list`). (#30)
+
+[Unreleased]: https://github.com/mjblack/sonarr/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/mjblack/sonarr/compare/25d2918...v0.2.0
