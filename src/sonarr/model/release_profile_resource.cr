@@ -2,24 +2,24 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ReleaseProfileResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "enabled", emit_null: true)]
+  @[JSON::Field(key: "enabled")]
   property enabled : Bool?
 
-  @[JSON::Field(key: "required", emit_null: true)]
+  @[JSON::Field(key: "required")]
   property required : JSON::Any?
 
-  @[JSON::Field(key: "ignored", emit_null: true)]
+  @[JSON::Field(key: "ignored")]
   property ignored : JSON::Any?
 
-  @[JSON::Field(key: "indexerId", emit_null: true)]
+  @[JSON::Field(key: "indexerId")]
   property indexer_id : Int32?
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 end

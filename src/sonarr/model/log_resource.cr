@@ -2,27 +2,27 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::LogResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "time", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "time", converter: Sonarr::TimeConverter)]
   property time : Time?
 
-  @[JSON::Field(key: "exception", emit_null: true)]
+  @[JSON::Field(key: "exception")]
   property exception : String?
 
-  @[JSON::Field(key: "exceptionType", emit_null: true)]
+  @[JSON::Field(key: "exceptionType")]
   property exception_type : String?
 
-  @[JSON::Field(key: "level", emit_null: true)]
+  @[JSON::Field(key: "level")]
   property level : String?
 
-  @[JSON::Field(key: "logger", emit_null: true)]
+  @[JSON::Field(key: "logger")]
   property logger : String?
 
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : String?
 
-  @[JSON::Field(key: "method", emit_null: true)]
+  @[JSON::Field(key: "method")]
   property method : String?
 end

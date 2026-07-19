@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::EpisodesMonitoredResource < Sonarr::Model
-  @[JSON::Field(key: "episodeIds", emit_null: true)]
+  @[JSON::Field(key: "episodeIds")]
   property episode_ids = [] of Int32
 
-  @[JSON::Field(key: "monitored", emit_null: true)]
+  @[JSON::Field(key: "monitored")]
   property monitored : Bool?
 end

@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::LanguageProfileResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "upgradeAllowed", emit_null: true)]
+  @[JSON::Field(key: "upgradeAllowed")]
   property upgrade_allowed : Bool?
 
-  @[JSON::Field(key: "cutoff", emit_null: true)]
+  @[JSON::Field(key: "cutoff")]
   property cutoff : Sonarr::Model::Language?
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::LanguageProfileItemResource
 end

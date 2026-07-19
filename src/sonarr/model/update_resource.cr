@@ -2,39 +2,39 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::UpdateResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "version", emit_null: true)]
+  @[JSON::Field(key: "version")]
   property version : String?
 
-  @[JSON::Field(key: "branch", emit_null: true)]
+  @[JSON::Field(key: "branch")]
   property branch : String?
 
-  @[JSON::Field(key: "releaseDate", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "releaseDate", converter: Sonarr::TimeConverter)]
   property release_date : Time?
 
-  @[JSON::Field(key: "fileName", emit_null: true)]
+  @[JSON::Field(key: "fileName")]
   property file_name : String?
 
-  @[JSON::Field(key: "url", emit_null: true)]
+  @[JSON::Field(key: "url")]
   property url : String?
 
-  @[JSON::Field(key: "installed", emit_null: true)]
+  @[JSON::Field(key: "installed")]
   property installed : Bool?
 
-  @[JSON::Field(key: "installedOn", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "installedOn", converter: Sonarr::TimeConverter)]
   property installed_on : Time?
 
-  @[JSON::Field(key: "installable", emit_null: true)]
+  @[JSON::Field(key: "installable")]
   property installable : Bool?
 
-  @[JSON::Field(key: "latest", emit_null: true)]
+  @[JSON::Field(key: "latest")]
   property latest : Bool?
 
-  @[JSON::Field(key: "changes", emit_null: true)]
+  @[JSON::Field(key: "changes")]
   property changes : Sonarr::Model::UpdateChanges?
 
-  @[JSON::Field(key: "hash", emit_null: true)]
+  @[JSON::Field(key: "hash")]
   property hash : String?
 end

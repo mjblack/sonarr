@@ -2,63 +2,63 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ManualImportResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "path", emit_null: true)]
+  @[JSON::Field(key: "path")]
   property path : String?
 
-  @[JSON::Field(key: "relativePath", emit_null: true)]
+  @[JSON::Field(key: "relativePath")]
   property relative_path : String?
 
-  @[JSON::Field(key: "folderName", emit_null: true)]
+  @[JSON::Field(key: "folderName")]
   property folder_name : String?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "size", emit_null: true)]
+  @[JSON::Field(key: "size")]
   property size : Int64?
 
-  @[JSON::Field(key: "series", emit_null: true)]
+  @[JSON::Field(key: "series")]
   property series : Sonarr::Model::SeriesResource?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "episodes", emit_null: true)]
+  @[JSON::Field(key: "episodes")]
   property episodes = [] of Sonarr::Model::EpisodeResource
 
-  @[JSON::Field(key: "episodeFileId", emit_null: true)]
+  @[JSON::Field(key: "episodeFileId")]
   property episode_file_id : Int32?
 
-  @[JSON::Field(key: "releaseGroup", emit_null: true)]
+  @[JSON::Field(key: "releaseGroup")]
   property release_group : String?
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::QualityModel?
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "qualityWeight", emit_null: true)]
+  @[JSON::Field(key: "qualityWeight")]
   property quality_weight : Int32?
 
-  @[JSON::Field(key: "downloadId", emit_null: true)]
+  @[JSON::Field(key: "downloadId")]
   property download_id : String?
 
-  @[JSON::Field(key: "customFormats", emit_null: true)]
+  @[JSON::Field(key: "customFormats")]
   property custom_formats = [] of Sonarr::Model::CustomFormatResource
 
-  @[JSON::Field(key: "customFormatScore", emit_null: true)]
+  @[JSON::Field(key: "customFormatScore")]
   property custom_format_score : Int32?
 
-  @[JSON::Field(key: "indexerFlags", emit_null: true)]
+  @[JSON::Field(key: "indexerFlags")]
   property indexer_flags : Int32?
 
-  @[JSON::Field(key: "releaseType", emit_null: true)]
+  @[JSON::Field(key: "releaseType")]
   property release_type : Sonarr::ReleaseType?
 
-  @[JSON::Field(key: "rejections", emit_null: true)]
+  @[JSON::Field(key: "rejections")]
   property rejections = [] of Sonarr::Model::ImportRejectionResource
 end

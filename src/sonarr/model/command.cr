@@ -2,39 +2,39 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::Command < Sonarr::Model
-  @[JSON::Field(key: "sendUpdatesToClient", emit_null: true)]
+  @[JSON::Field(key: "sendUpdatesToClient")]
   property send_updates_to_client : Bool?
 
-  @[JSON::Field(key: "updateScheduledTask", emit_null: true)]
+  @[JSON::Field(key: "updateScheduledTask")]
   property update_scheduled_task : Bool?
 
-  @[JSON::Field(key: "completionMessage", emit_null: true)]
+  @[JSON::Field(key: "completionMessage")]
   property completion_message : String?
 
-  @[JSON::Field(key: "requiresDiskAccess", emit_null: true)]
+  @[JSON::Field(key: "requiresDiskAccess")]
   property requires_disk_access : Bool?
 
-  @[JSON::Field(key: "isExclusive", emit_null: true)]
+  @[JSON::Field(key: "isExclusive")]
   property is_exclusive : Bool?
 
-  @[JSON::Field(key: "isLongRunning", emit_null: true)]
+  @[JSON::Field(key: "isLongRunning")]
   property is_long_running : Bool?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "lastExecutionTime", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "lastExecutionTime", converter: Sonarr::TimeConverter)]
   property last_execution_time : Time?
 
-  @[JSON::Field(key: "lastStartTime", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "lastStartTime", converter: Sonarr::TimeConverter)]
   property last_start_time : Time?
 
-  @[JSON::Field(key: "trigger", emit_null: true)]
+  @[JSON::Field(key: "trigger")]
   property trigger : Sonarr::CommandTrigger?
 
-  @[JSON::Field(key: "suppressMessages", emit_null: true)]
+  @[JSON::Field(key: "suppressMessages")]
   property suppress_messages : Bool?
 
-  @[JSON::Field(key: "clientUserAgent", emit_null: true)]
+  @[JSON::Field(key: "clientUserAgent")]
   property client_user_agent : String?
 end

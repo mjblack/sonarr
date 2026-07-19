@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ProviderMessage < Sonarr::Model
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : String?
 
-  @[JSON::Field(key: "type", emit_null: true)]
+  @[JSON::Field(key: "type")]
   property type_field : Sonarr::ProviderMessageType?
 end

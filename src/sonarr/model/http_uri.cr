@@ -2,24 +2,24 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::HttpUri < Sonarr::Model
-  @[JSON::Field(key: "fullUri", emit_null: true)]
+  @[JSON::Field(key: "fullUri")]
   property full_uri : String?
 
-  @[JSON::Field(key: "scheme", emit_null: true)]
+  @[JSON::Field(key: "scheme")]
   property scheme : String?
 
-  @[JSON::Field(key: "host", emit_null: true)]
+  @[JSON::Field(key: "host")]
   property host : String?
 
-  @[JSON::Field(key: "port", emit_null: true)]
+  @[JSON::Field(key: "port")]
   property port : Int32?
 
-  @[JSON::Field(key: "path", emit_null: true)]
+  @[JSON::Field(key: "path")]
   property path : String?
 
-  @[JSON::Field(key: "query", emit_null: true)]
+  @[JSON::Field(key: "query")]
   property query : String?
 
-  @[JSON::Field(key: "fragment", emit_null: true)]
+  @[JSON::Field(key: "fragment")]
   property fragment : String?
 end

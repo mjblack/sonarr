@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::QualityDefinitionLimitsResource < Sonarr::Model
-  @[JSON::Field(key: "min", emit_null: true)]
+  @[JSON::Field(key: "min")]
   property min : Int32?
 
-  @[JSON::Field(key: "max", emit_null: true)]
+  @[JSON::Field(key: "max")]
   property max : Int32?
 end

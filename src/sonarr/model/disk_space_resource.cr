@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::DiskSpaceResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "path", emit_null: true)]
+  @[JSON::Field(key: "path")]
   property path : String?
 
-  @[JSON::Field(key: "label", emit_null: true)]
+  @[JSON::Field(key: "label")]
   property label : String?
 
-  @[JSON::Field(key: "freeSpace", emit_null: true)]
+  @[JSON::Field(key: "freeSpace")]
   property free_space : Int64?
 
-  @[JSON::Field(key: "totalSpace", emit_null: true)]
+  @[JSON::Field(key: "totalSpace")]
   property total_space : Int64?
 end

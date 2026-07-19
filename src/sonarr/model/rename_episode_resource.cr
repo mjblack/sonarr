@@ -2,24 +2,24 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::RenameEpisodeResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "seriesId", emit_null: true)]
+  @[JSON::Field(key: "seriesId")]
   property series_id : Int32?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "episodeNumbers", emit_null: true)]
+  @[JSON::Field(key: "episodeNumbers")]
   property episode_numbers = [] of Int32
 
-  @[JSON::Field(key: "episodeFileId", emit_null: true)]
+  @[JSON::Field(key: "episodeFileId")]
   property episode_file_id : Int32?
 
-  @[JSON::Field(key: "existingPath", emit_null: true)]
+  @[JSON::Field(key: "existingPath")]
   property existing_path : String?
 
-  @[JSON::Field(key: "newPath", emit_null: true)]
+  @[JSON::Field(key: "newPath")]
   property new_path : String?
 end

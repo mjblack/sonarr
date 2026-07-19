@@ -2,12 +2,12 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ImportListExclusionResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "tvdbId", emit_null: true)]
+  @[JSON::Field(key: "tvdbId")]
   property tvdb_id : Int32?
 
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 end

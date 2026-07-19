@@ -2,21 +2,21 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::BackupResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "path", emit_null: true)]
+  @[JSON::Field(key: "path")]
   property path : String?
 
-  @[JSON::Field(key: "type", emit_null: true)]
+  @[JSON::Field(key: "type")]
   property type_field : Sonarr::BackupType?
 
-  @[JSON::Field(key: "size", emit_null: true)]
+  @[JSON::Field(key: "size")]
   property size : Int64?
 
-  @[JSON::Field(key: "time", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "time", converter: Sonarr::TimeConverter)]
   property time : Time?
 end

@@ -2,27 +2,27 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::SeasonStatisticsResource < Sonarr::Model
-  @[JSON::Field(key: "nextAiring", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "nextAiring", converter: Sonarr::TimeConverter)]
   property next_airing : Time?
 
-  @[JSON::Field(key: "previousAiring", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "previousAiring", converter: Sonarr::TimeConverter)]
   property previous_airing : Time?
 
-  @[JSON::Field(key: "episodeFileCount", emit_null: true)]
+  @[JSON::Field(key: "episodeFileCount")]
   property episode_file_count : Int32?
 
-  @[JSON::Field(key: "episodeCount", emit_null: true)]
+  @[JSON::Field(key: "episodeCount")]
   property episode_count : Int32?
 
-  @[JSON::Field(key: "totalEpisodeCount", emit_null: true)]
+  @[JSON::Field(key: "totalEpisodeCount")]
   property total_episode_count : Int32?
 
-  @[JSON::Field(key: "sizeOnDisk", emit_null: true)]
+  @[JSON::Field(key: "sizeOnDisk")]
   property size_on_disk : Int64?
 
-  @[JSON::Field(key: "releaseGroups", emit_null: true)]
+  @[JSON::Field(key: "releaseGroups")]
   property release_groups = [] of String
 
-  @[JSON::Field(key: "percentOfEpisodes", emit_null: true)]
+  @[JSON::Field(key: "percentOfEpisodes")]
   property percent_of_episodes : Float64?
 end

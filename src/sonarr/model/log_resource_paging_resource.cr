@@ -2,21 +2,21 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::LogResourcePagingResource < Sonarr::Model
-  @[JSON::Field(key: "page", emit_null: true)]
+  @[JSON::Field(key: "page")]
   property page : Int32?
 
-  @[JSON::Field(key: "pageSize", emit_null: true)]
+  @[JSON::Field(key: "pageSize")]
   property page_size : Int32?
 
-  @[JSON::Field(key: "sortKey", emit_null: true)]
+  @[JSON::Field(key: "sortKey")]
   property sort_key : String?
 
-  @[JSON::Field(key: "sortDirection", emit_null: true)]
+  @[JSON::Field(key: "sortDirection")]
   property sort_direction : Sonarr::SortDirection?
 
-  @[JSON::Field(key: "totalRecords", emit_null: true)]
+  @[JSON::Field(key: "totalRecords")]
   property total_records : Int32?
 
-  @[JSON::Field(key: "records", emit_null: true)]
+  @[JSON::Field(key: "records")]
   property records = [] of Sonarr::Model::LogResource
 end

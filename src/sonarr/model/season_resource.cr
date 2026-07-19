@@ -2,15 +2,15 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::SeasonResource < Sonarr::Model
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "monitored", emit_null: true)]
+  @[JSON::Field(key: "monitored")]
   property monitored : Bool?
 
-  @[JSON::Field(key: "statistics", emit_null: true)]
+  @[JSON::Field(key: "statistics")]
   property statistics : Sonarr::Model::SeasonStatisticsResource?
 
-  @[JSON::Field(key: "images", emit_null: true)]
+  @[JSON::Field(key: "images")]
   property images = [] of Sonarr::Model::MediaCover
 end

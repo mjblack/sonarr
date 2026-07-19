@@ -2,27 +2,27 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ParseResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "parsedEpisodeInfo", emit_null: true)]
+  @[JSON::Field(key: "parsedEpisodeInfo")]
   property parsed_episode_info : Sonarr::Model::ParsedEpisodeInfo?
 
-  @[JSON::Field(key: "series", emit_null: true)]
+  @[JSON::Field(key: "series")]
   property series : Sonarr::Model::SeriesResource?
 
-  @[JSON::Field(key: "episodes", emit_null: true)]
+  @[JSON::Field(key: "episodes")]
   property episodes = [] of Sonarr::Model::EpisodeResource
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "customFormats", emit_null: true)]
+  @[JSON::Field(key: "customFormats")]
   property custom_formats = [] of Sonarr::Model::CustomFormatResource
 
-  @[JSON::Field(key: "customFormatScore", emit_null: true)]
+  @[JSON::Field(key: "customFormatScore")]
   property custom_format_score : Int32?
 end

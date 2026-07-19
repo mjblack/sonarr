@@ -2,12 +2,12 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::UnmappedFolder < Sonarr::Model
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "path", emit_null: true)]
+  @[JSON::Field(key: "path")]
   property path : String?
 
-  @[JSON::Field(key: "relativePath", emit_null: true)]
+  @[JSON::Field(key: "relativePath")]
   property relative_path : String?
 end

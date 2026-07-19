@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::UpdateChanges < Sonarr::Model
-  @[JSON::Field(key: "new", emit_null: true)]
+  @[JSON::Field(key: "new")]
   property new = [] of String
 
-  @[JSON::Field(key: "fixed", emit_null: true)]
+  @[JSON::Field(key: "fixed")]
   property fixed = [] of String
 end

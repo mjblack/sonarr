@@ -2,39 +2,39 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::BlocklistResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "seriesId", emit_null: true)]
+  @[JSON::Field(key: "seriesId")]
   property series_id : Int32?
 
-  @[JSON::Field(key: "episodeIds", emit_null: true)]
+  @[JSON::Field(key: "episodeIds")]
   property episode_ids = [] of Int32
 
-  @[JSON::Field(key: "sourceTitle", emit_null: true)]
+  @[JSON::Field(key: "sourceTitle")]
   property source_title : String?
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::QualityModel?
 
-  @[JSON::Field(key: "customFormats", emit_null: true)]
+  @[JSON::Field(key: "customFormats")]
   property custom_formats = [] of Sonarr::Model::CustomFormatResource
 
-  @[JSON::Field(key: "date", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "date", converter: Sonarr::TimeConverter)]
   property date : Time?
 
-  @[JSON::Field(key: "protocol", emit_null: true)]
+  @[JSON::Field(key: "protocol")]
   property protocol : Sonarr::DownloadProtocol?
 
-  @[JSON::Field(key: "indexer", emit_null: true)]
+  @[JSON::Field(key: "indexer")]
   property indexer : String?
 
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : String?
 
-  @[JSON::Field(key: "series", emit_null: true)]
+  @[JSON::Field(key: "series")]
   property series : Sonarr::Model::SeriesResource?
 end

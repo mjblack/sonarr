@@ -2,12 +2,12 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::MediaCover < Sonarr::Model
-  @[JSON::Field(key: "coverType", emit_null: true)]
+  @[JSON::Field(key: "coverType")]
   property cover_type : Sonarr::MediaCoverTypes?
 
-  @[JSON::Field(key: "url", emit_null: true)]
+  @[JSON::Field(key: "url")]
   property url : String?
 
-  @[JSON::Field(key: "remoteUrl", emit_null: true)]
+  @[JSON::Field(key: "remoteUrl")]
   property remote_url : String?
 end

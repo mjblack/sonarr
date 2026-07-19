@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::EpisodeFileListResource < Sonarr::Model
-  @[JSON::Field(key: "episodeFileIds", emit_null: true)]
+  @[JSON::Field(key: "episodeFileIds")]
   property episode_file_ids = [] of Int32
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::QualityModel?
 
-  @[JSON::Field(key: "sceneName", emit_null: true)]
+  @[JSON::Field(key: "sceneName")]
   property scene_name : String?
 
-  @[JSON::Field(key: "releaseGroup", emit_null: true)]
+  @[JSON::Field(key: "releaseGroup")]
   property release_group : String?
 end

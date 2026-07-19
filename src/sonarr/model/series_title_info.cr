@@ -2,15 +2,15 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::SeriesTitleInfo < Sonarr::Model
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "titleWithoutYear", emit_null: true)]
+  @[JSON::Field(key: "titleWithoutYear")]
   property title_without_year : String?
 
-  @[JSON::Field(key: "year", emit_null: true)]
+  @[JSON::Field(key: "year")]
   property year : Int32?
 
-  @[JSON::Field(key: "allTitles", emit_null: true)]
+  @[JSON::Field(key: "allTitles")]
   property all_titles = [] of String
 end

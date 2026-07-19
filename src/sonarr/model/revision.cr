@@ -2,12 +2,12 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::Revision < Sonarr::Model
-  @[JSON::Field(key: "version", emit_null: true)]
+  @[JSON::Field(key: "version")]
   property version : Int32?
 
-  @[JSON::Field(key: "real", emit_null: true)]
+  @[JSON::Field(key: "real")]
   property real : Int32?
 
-  @[JSON::Field(key: "isRepack", emit_null: true)]
+  @[JSON::Field(key: "isRepack")]
   property is_repack : Bool?
 end

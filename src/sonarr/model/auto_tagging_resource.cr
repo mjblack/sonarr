@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::AutoTaggingResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "removeTagsAutomatically", emit_null: true)]
+  @[JSON::Field(key: "removeTagsAutomatically")]
   property remove_tags_automatically : Bool?
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "specifications", emit_null: true)]
+  @[JSON::Field(key: "specifications")]
   property specifications = [] of Sonarr::Model::AutoTaggingSpecificationSchema
 end

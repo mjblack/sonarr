@@ -2,60 +2,60 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::IndexerResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "fields", emit_null: true)]
+  @[JSON::Field(key: "fields")]
   property fields = [] of Sonarr::Model::Field
 
-  @[JSON::Field(key: "implementationName", emit_null: true)]
+  @[JSON::Field(key: "implementationName")]
   property implementation_name : String?
 
-  @[JSON::Field(key: "implementation", emit_null: true)]
+  @[JSON::Field(key: "implementation")]
   property implementation : String?
 
-  @[JSON::Field(key: "configContract", emit_null: true)]
+  @[JSON::Field(key: "configContract")]
   property config_contract : String?
 
-  @[JSON::Field(key: "infoLink", emit_null: true)]
+  @[JSON::Field(key: "infoLink")]
   property info_link : String?
 
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : Sonarr::Model::ProviderMessage?
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "presets", emit_null: true)]
+  @[JSON::Field(key: "presets")]
   property presets = [] of Sonarr::Model::IndexerResource
 
-  @[JSON::Field(key: "enableRss", emit_null: true)]
+  @[JSON::Field(key: "enableRss")]
   property enable_rss : Bool?
 
-  @[JSON::Field(key: "enableAutomaticSearch", emit_null: true)]
+  @[JSON::Field(key: "enableAutomaticSearch")]
   property enable_automatic_search : Bool?
 
-  @[JSON::Field(key: "enableInteractiveSearch", emit_null: true)]
+  @[JSON::Field(key: "enableInteractiveSearch")]
   property enable_interactive_search : Bool?
 
-  @[JSON::Field(key: "supportsRss", emit_null: true)]
+  @[JSON::Field(key: "supportsRss")]
   property supports_rss : Bool?
 
-  @[JSON::Field(key: "supportsSearch", emit_null: true)]
+  @[JSON::Field(key: "supportsSearch")]
   property supports_search : Bool?
 
-  @[JSON::Field(key: "protocol", emit_null: true)]
+  @[JSON::Field(key: "protocol")]
   property protocol : Sonarr::DownloadProtocol?
 
-  @[JSON::Field(key: "priority", emit_null: true)]
+  @[JSON::Field(key: "priority")]
   property priority : Int32?
 
-  @[JSON::Field(key: "seasonSearchMaximumSingleEpisodeAge", emit_null: true)]
+  @[JSON::Field(key: "seasonSearchMaximumSingleEpisodeAge")]
   property season_search_maximum_single_episode_age : Int32?
 
-  @[JSON::Field(key: "downloadClientId", emit_null: true)]
+  @[JSON::Field(key: "downloadClientId")]
   property download_client_id : Int32?
 end

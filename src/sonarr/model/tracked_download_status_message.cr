@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::TrackedDownloadStatusMessage < Sonarr::Model
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "messages", emit_null: true)]
+  @[JSON::Field(key: "messages")]
   property messages = [] of String
 end

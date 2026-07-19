@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::AddSeriesOptions < Sonarr::Model
-  @[JSON::Field(key: "ignoreEpisodesWithFiles", emit_null: true)]
+  @[JSON::Field(key: "ignoreEpisodesWithFiles")]
   property ignore_episodes_with_files : Bool?
 
-  @[JSON::Field(key: "ignoreEpisodesWithoutFiles", emit_null: true)]
+  @[JSON::Field(key: "ignoreEpisodesWithoutFiles")]
   property ignore_episodes_without_files : Bool?
 
-  @[JSON::Field(key: "monitor", emit_null: true)]
+  @[JSON::Field(key: "monitor")]
   property monitor : Sonarr::MonitorTypes?
 
-  @[JSON::Field(key: "searchForMissingEpisodes", emit_null: true)]
+  @[JSON::Field(key: "searchForMissingEpisodes")]
   property search_for_missing_episodes : Bool?
 
-  @[JSON::Field(key: "searchForCutoffUnmetEpisodes", emit_null: true)]
+  @[JSON::Field(key: "searchForCutoffUnmetEpisodes")]
   property search_for_cutoff_unmet_episodes : Bool?
 end

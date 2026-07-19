@@ -2,39 +2,39 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::SeriesEditorResource < Sonarr::Model
-  @[JSON::Field(key: "seriesIds", emit_null: true)]
+  @[JSON::Field(key: "seriesIds")]
   property series_ids = [] of Int32
 
-  @[JSON::Field(key: "monitored", emit_null: true)]
+  @[JSON::Field(key: "monitored")]
   property monitored : Bool?
 
-  @[JSON::Field(key: "monitorNewItems", emit_null: true)]
+  @[JSON::Field(key: "monitorNewItems")]
   property monitor_new_items : Sonarr::NewItemMonitorTypes?
 
-  @[JSON::Field(key: "qualityProfileId", emit_null: true)]
+  @[JSON::Field(key: "qualityProfileId")]
   property quality_profile_id : Int32?
 
-  @[JSON::Field(key: "seriesType", emit_null: true)]
+  @[JSON::Field(key: "seriesType")]
   property series_type : Sonarr::SeriesTypes?
 
-  @[JSON::Field(key: "seasonFolder", emit_null: true)]
+  @[JSON::Field(key: "seasonFolder")]
   property season_folder : Bool?
 
-  @[JSON::Field(key: "rootFolderPath", emit_null: true)]
+  @[JSON::Field(key: "rootFolderPath")]
   property root_folder_path : String?
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "applyTags", emit_null: true)]
+  @[JSON::Field(key: "applyTags")]
   property apply_tags : Sonarr::ApplyTags?
 
-  @[JSON::Field(key: "moveFiles", emit_null: true)]
+  @[JSON::Field(key: "moveFiles")]
   property move_files : Bool?
 
-  @[JSON::Field(key: "deleteFiles", emit_null: true)]
+  @[JSON::Field(key: "deleteFiles")]
   property delete_files : Bool?
 
-  @[JSON::Field(key: "addImportListExclusion", emit_null: true)]
+  @[JSON::Field(key: "addImportListExclusion")]
   property add_import_list_exclusion : Bool?
 end

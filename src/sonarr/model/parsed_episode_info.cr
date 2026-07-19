@@ -2,84 +2,84 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ParsedEpisodeInfo < Sonarr::Model
-  @[JSON::Field(key: "releaseTitle", emit_null: true)]
+  @[JSON::Field(key: "releaseTitle")]
   property release_title : String?
 
-  @[JSON::Field(key: "seriesTitle", emit_null: true)]
+  @[JSON::Field(key: "seriesTitle")]
   property series_title : String?
 
-  @[JSON::Field(key: "seriesTitleInfo", emit_null: true)]
+  @[JSON::Field(key: "seriesTitleInfo")]
   property series_title_info : Sonarr::Model::SeriesTitleInfo?
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::QualityModel?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "episodeNumbers", emit_null: true)]
+  @[JSON::Field(key: "episodeNumbers")]
   property episode_numbers = [] of Int32
 
-  @[JSON::Field(key: "absoluteEpisodeNumbers", emit_null: true)]
+  @[JSON::Field(key: "absoluteEpisodeNumbers")]
   property absolute_episode_numbers = [] of Int32
 
-  @[JSON::Field(key: "specialAbsoluteEpisodeNumbers", emit_null: true)]
+  @[JSON::Field(key: "specialAbsoluteEpisodeNumbers")]
   property special_absolute_episode_numbers = [] of Float64
 
-  @[JSON::Field(key: "airDate", emit_null: true)]
+  @[JSON::Field(key: "airDate")]
   property air_date : String?
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "fullSeason", emit_null: true)]
+  @[JSON::Field(key: "fullSeason")]
   property full_season : Bool?
 
-  @[JSON::Field(key: "isPartialSeason", emit_null: true)]
+  @[JSON::Field(key: "isPartialSeason")]
   property is_partial_season : Bool?
 
-  @[JSON::Field(key: "isMultiSeason", emit_null: true)]
+  @[JSON::Field(key: "isMultiSeason")]
   property is_multi_season : Bool?
 
-  @[JSON::Field(key: "isSeasonExtra", emit_null: true)]
+  @[JSON::Field(key: "isSeasonExtra")]
   property is_season_extra : Bool?
 
-  @[JSON::Field(key: "isSplitEpisode", emit_null: true)]
+  @[JSON::Field(key: "isSplitEpisode")]
   property is_split_episode : Bool?
 
-  @[JSON::Field(key: "isMiniSeries", emit_null: true)]
+  @[JSON::Field(key: "isMiniSeries")]
   property is_mini_series : Bool?
 
-  @[JSON::Field(key: "special", emit_null: true)]
+  @[JSON::Field(key: "special")]
   property special : Bool?
 
-  @[JSON::Field(key: "releaseGroup", emit_null: true)]
+  @[JSON::Field(key: "releaseGroup")]
   property release_group : String?
 
-  @[JSON::Field(key: "releaseHash", emit_null: true)]
+  @[JSON::Field(key: "releaseHash")]
   property release_hash : String?
 
-  @[JSON::Field(key: "seasonPart", emit_null: true)]
+  @[JSON::Field(key: "seasonPart")]
   property season_part : Int32?
 
-  @[JSON::Field(key: "releaseTokens", emit_null: true)]
+  @[JSON::Field(key: "releaseTokens")]
   property release_tokens : String?
 
-  @[JSON::Field(key: "dailyPart", emit_null: true)]
+  @[JSON::Field(key: "dailyPart")]
   property daily_part : Int32?
 
-  @[JSON::Field(key: "isDaily", emit_null: true)]
+  @[JSON::Field(key: "isDaily")]
   property is_daily : Bool?
 
-  @[JSON::Field(key: "isAbsoluteNumbering", emit_null: true)]
+  @[JSON::Field(key: "isAbsoluteNumbering")]
   property is_absolute_numbering : Bool?
 
-  @[JSON::Field(key: "isPossibleSpecialEpisode", emit_null: true)]
+  @[JSON::Field(key: "isPossibleSpecialEpisode")]
   property is_possible_special_episode : Bool?
 
-  @[JSON::Field(key: "isPossibleSceneSeasonSpecial", emit_null: true)]
+  @[JSON::Field(key: "isPossibleSceneSeasonSpecial")]
   property is_possible_scene_season_special : Bool?
 
-  @[JSON::Field(key: "releaseType", emit_null: true)]
+  @[JSON::Field(key: "releaseType")]
   property release_type : Sonarr::ReleaseType?
 end

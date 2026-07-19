@@ -2,27 +2,27 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::TaskResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "taskName", emit_null: true)]
+  @[JSON::Field(key: "taskName")]
   property task_name : String?
 
-  @[JSON::Field(key: "interval", emit_null: true)]
+  @[JSON::Field(key: "interval")]
   property interval : Int32?
 
-  @[JSON::Field(key: "lastExecution", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "lastExecution", converter: Sonarr::TimeConverter)]
   property last_execution : Time?
 
-  @[JSON::Field(key: "lastStartTime", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "lastStartTime", converter: Sonarr::TimeConverter)]
   property last_start_time : Time?
 
-  @[JSON::Field(key: "nextExecution", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "nextExecution", converter: Sonarr::TimeConverter)]
   property next_execution : Time?
 
-  @[JSON::Field(key: "lastDuration", emit_null: true)]
+  @[JSON::Field(key: "lastDuration")]
   property last_duration : String?
 end

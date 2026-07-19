@@ -2,12 +2,12 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::MonitoringOptions < Sonarr::Model
-  @[JSON::Field(key: "ignoreEpisodesWithFiles", emit_null: true)]
+  @[JSON::Field(key: "ignoreEpisodesWithFiles")]
   property ignore_episodes_with_files : Bool?
 
-  @[JSON::Field(key: "ignoreEpisodesWithoutFiles", emit_null: true)]
+  @[JSON::Field(key: "ignoreEpisodesWithoutFiles")]
   property ignore_episodes_without_files : Bool?
 
-  @[JSON::Field(key: "monitor", emit_null: true)]
+  @[JSON::Field(key: "monitor")]
   property monitor : Sonarr::MonitorTypes?
 end

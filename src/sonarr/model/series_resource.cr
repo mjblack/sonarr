@@ -2,138 +2,138 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::SeriesResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "alternateTitles", emit_null: true)]
+  @[JSON::Field(key: "alternateTitles")]
   property alternate_titles = [] of Sonarr::Model::AlternateTitleResource
 
-  @[JSON::Field(key: "sortTitle", emit_null: true)]
+  @[JSON::Field(key: "sortTitle")]
   property sort_title : String?
 
-  @[JSON::Field(key: "status", emit_null: true)]
+  @[JSON::Field(key: "status")]
   property status : Sonarr::SeriesStatusType?
 
-  @[JSON::Field(key: "ended", emit_null: true)]
+  @[JSON::Field(key: "ended")]
   property ended : Bool?
 
-  @[JSON::Field(key: "profileName", emit_null: true)]
+  @[JSON::Field(key: "profileName")]
   property profile_name : String?
 
-  @[JSON::Field(key: "overview", emit_null: true)]
+  @[JSON::Field(key: "overview")]
   property overview : String?
 
-  @[JSON::Field(key: "nextAiring", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "nextAiring", converter: Sonarr::TimeConverter)]
   property next_airing : Time?
 
-  @[JSON::Field(key: "previousAiring", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "previousAiring", converter: Sonarr::TimeConverter)]
   property previous_airing : Time?
 
-  @[JSON::Field(key: "network", emit_null: true)]
+  @[JSON::Field(key: "network")]
   property network : String?
 
-  @[JSON::Field(key: "airTime", emit_null: true)]
+  @[JSON::Field(key: "airTime")]
   property air_time : String?
 
-  @[JSON::Field(key: "images", emit_null: true)]
+  @[JSON::Field(key: "images")]
   property images = [] of Sonarr::Model::MediaCover
 
-  @[JSON::Field(key: "originalLanguage", emit_null: true)]
+  @[JSON::Field(key: "originalLanguage")]
   property original_language : Sonarr::Model::Language?
 
-  @[JSON::Field(key: "remotePoster", emit_null: true)]
+  @[JSON::Field(key: "remotePoster")]
   property remote_poster : String?
 
-  @[JSON::Field(key: "seasons", emit_null: true)]
+  @[JSON::Field(key: "seasons")]
   property seasons = [] of Sonarr::Model::SeasonResource
 
-  @[JSON::Field(key: "year", emit_null: true)]
+  @[JSON::Field(key: "year")]
   property year : Int32?
 
-  @[JSON::Field(key: "path", emit_null: true)]
+  @[JSON::Field(key: "path")]
   property path : String?
 
-  @[JSON::Field(key: "qualityProfileId", emit_null: true)]
+  @[JSON::Field(key: "qualityProfileId")]
   property quality_profile_id : Int32?
 
-  @[JSON::Field(key: "seasonFolder", emit_null: true)]
+  @[JSON::Field(key: "seasonFolder")]
   property season_folder : Bool?
 
-  @[JSON::Field(key: "monitored", emit_null: true)]
+  @[JSON::Field(key: "monitored")]
   property monitored : Bool?
 
-  @[JSON::Field(key: "monitorNewItems", emit_null: true)]
+  @[JSON::Field(key: "monitorNewItems")]
   property monitor_new_items : Sonarr::NewItemMonitorTypes?
 
-  @[JSON::Field(key: "useSceneNumbering", emit_null: true)]
+  @[JSON::Field(key: "useSceneNumbering")]
   property use_scene_numbering : Bool?
 
-  @[JSON::Field(key: "runtime", emit_null: true)]
+  @[JSON::Field(key: "runtime")]
   property runtime : Int32?
 
-  @[JSON::Field(key: "tvdbId", emit_null: true)]
+  @[JSON::Field(key: "tvdbId")]
   property tvdb_id : Int32?
 
-  @[JSON::Field(key: "tvRageId", emit_null: true)]
+  @[JSON::Field(key: "tvRageId")]
   property tv_rage_id : Int32?
 
-  @[JSON::Field(key: "tvMazeId", emit_null: true)]
+  @[JSON::Field(key: "tvMazeId")]
   property tv_maze_id : Int32?
 
-  @[JSON::Field(key: "tmdbId", emit_null: true)]
+  @[JSON::Field(key: "tmdbId")]
   property tmdb_id : Int32?
 
-  @[JSON::Field(key: "firstAired", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "firstAired", converter: Sonarr::TimeConverter)]
   property first_aired : Time?
 
-  @[JSON::Field(key: "lastAired", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "lastAired", converter: Sonarr::TimeConverter)]
   property last_aired : Time?
 
-  @[JSON::Field(key: "seriesType", emit_null: true)]
+  @[JSON::Field(key: "seriesType")]
   property series_type : Sonarr::SeriesTypes?
 
-  @[JSON::Field(key: "cleanTitle", emit_null: true)]
+  @[JSON::Field(key: "cleanTitle")]
   property clean_title : String?
 
-  @[JSON::Field(key: "imdbId", emit_null: true)]
+  @[JSON::Field(key: "imdbId")]
   property imdb_id : String?
 
-  @[JSON::Field(key: "titleSlug", emit_null: true)]
+  @[JSON::Field(key: "titleSlug")]
   property title_slug : String?
 
-  @[JSON::Field(key: "rootFolderPath", emit_null: true)]
+  @[JSON::Field(key: "rootFolderPath")]
   property root_folder_path : String?
 
-  @[JSON::Field(key: "folder", emit_null: true)]
+  @[JSON::Field(key: "folder")]
   property folder : String?
 
-  @[JSON::Field(key: "certification", emit_null: true)]
+  @[JSON::Field(key: "certification")]
   property certification : String?
 
-  @[JSON::Field(key: "genres", emit_null: true)]
+  @[JSON::Field(key: "genres")]
   property genres = [] of String
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "added", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "added", converter: Sonarr::TimeConverter)]
   property added : Time?
 
-  @[JSON::Field(key: "addOptions", emit_null: true)]
+  @[JSON::Field(key: "addOptions")]
   property add_options : Sonarr::Model::AddSeriesOptions?
 
-  @[JSON::Field(key: "ratings", emit_null: true)]
+  @[JSON::Field(key: "ratings")]
   property ratings : Sonarr::Model::Ratings?
 
-  @[JSON::Field(key: "statistics", emit_null: true)]
+  @[JSON::Field(key: "statistics")]
   property statistics : Sonarr::Model::SeriesStatisticsResource?
 
-  @[JSON::Field(key: "episodesChanged", emit_null: true)]
+  @[JSON::Field(key: "episodesChanged")]
   property episodes_changed : Bool?
 
-  @[JSON::Field(key: "languageProfileId", emit_null: true)]
+  @[JSON::Field(key: "languageProfileId")]
   property language_profile_id : Int32?
 end

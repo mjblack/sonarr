@@ -2,54 +2,54 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::Field < Sonarr::Model
-  @[JSON::Field(key: "order", emit_null: true)]
+  @[JSON::Field(key: "order")]
   property order : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "label", emit_null: true)]
+  @[JSON::Field(key: "label")]
   property label : String?
 
-  @[JSON::Field(key: "unit", emit_null: true)]
+  @[JSON::Field(key: "unit")]
   property unit : String?
 
-  @[JSON::Field(key: "helpText", emit_null: true)]
+  @[JSON::Field(key: "helpText")]
   property help_text : String?
 
-  @[JSON::Field(key: "helpTextWarning", emit_null: true)]
+  @[JSON::Field(key: "helpTextWarning")]
   property help_text_warning : String?
 
-  @[JSON::Field(key: "helpLink", emit_null: true)]
+  @[JSON::Field(key: "helpLink")]
   property help_link : String?
 
-  @[JSON::Field(key: "value", emit_null: true)]
+  @[JSON::Field(key: "value")]
   property value : JSON::Any?
 
-  @[JSON::Field(key: "type", emit_null: true)]
+  @[JSON::Field(key: "type")]
   property type_field : String?
 
-  @[JSON::Field(key: "advanced", emit_null: true)]
+  @[JSON::Field(key: "advanced")]
   property advanced : Bool?
 
-  @[JSON::Field(key: "selectOptions", emit_null: true)]
+  @[JSON::Field(key: "selectOptions")]
   property select_options = [] of Sonarr::Model::SelectOption
 
-  @[JSON::Field(key: "selectOptionsProviderAction", emit_null: true)]
+  @[JSON::Field(key: "selectOptionsProviderAction")]
   property select_options_provider_action : String?
 
-  @[JSON::Field(key: "section", emit_null: true)]
+  @[JSON::Field(key: "section")]
   property section : String?
 
-  @[JSON::Field(key: "hidden", emit_null: true)]
+  @[JSON::Field(key: "hidden")]
   property hidden : String?
 
-  @[JSON::Field(key: "privacy", emit_null: true)]
+  @[JSON::Field(key: "privacy")]
   property privacy : Sonarr::PrivacyLevel?
 
-  @[JSON::Field(key: "placeholder", emit_null: true)]
+  @[JSON::Field(key: "placeholder")]
   property placeholder : String?
 
-  @[JSON::Field(key: "isFloat", emit_null: true)]
+  @[JSON::Field(key: "isFloat")]
   property is_float : Bool?
 end

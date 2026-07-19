@@ -2,39 +2,39 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::NamingConfigResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "renameEpisodes", emit_null: true)]
+  @[JSON::Field(key: "renameEpisodes")]
   property rename_episodes : Bool?
 
-  @[JSON::Field(key: "replaceIllegalCharacters", emit_null: true)]
+  @[JSON::Field(key: "replaceIllegalCharacters")]
   property replace_illegal_characters : Bool?
 
-  @[JSON::Field(key: "colonReplacementFormat", emit_null: true)]
+  @[JSON::Field(key: "colonReplacementFormat")]
   property colon_replacement_format : Int32?
 
-  @[JSON::Field(key: "customColonReplacementFormat", emit_null: true)]
+  @[JSON::Field(key: "customColonReplacementFormat")]
   property custom_colon_replacement_format : String?
 
-  @[JSON::Field(key: "multiEpisodeStyle", emit_null: true)]
+  @[JSON::Field(key: "multiEpisodeStyle")]
   property multi_episode_style : Int32?
 
-  @[JSON::Field(key: "standardEpisodeFormat", emit_null: true)]
+  @[JSON::Field(key: "standardEpisodeFormat")]
   property standard_episode_format : String?
 
-  @[JSON::Field(key: "dailyEpisodeFormat", emit_null: true)]
+  @[JSON::Field(key: "dailyEpisodeFormat")]
   property daily_episode_format : String?
 
-  @[JSON::Field(key: "animeEpisodeFormat", emit_null: true)]
+  @[JSON::Field(key: "animeEpisodeFormat")]
   property anime_episode_format : String?
 
-  @[JSON::Field(key: "seriesFolderFormat", emit_null: true)]
+  @[JSON::Field(key: "seriesFolderFormat")]
   property series_folder_format : String?
 
-  @[JSON::Field(key: "seasonFolderFormat", emit_null: true)]
+  @[JSON::Field(key: "seasonFolderFormat")]
   property season_folder_format : String?
 
-  @[JSON::Field(key: "specialsFolderFormat", emit_null: true)]
+  @[JSON::Field(key: "specialsFolderFormat")]
   property specials_folder_format : String?
 end

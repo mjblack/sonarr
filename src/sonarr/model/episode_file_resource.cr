@@ -2,54 +2,54 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::EpisodeFileResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "seriesId", emit_null: true)]
+  @[JSON::Field(key: "seriesId")]
   property series_id : Int32?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "relativePath", emit_null: true)]
+  @[JSON::Field(key: "relativePath")]
   property relative_path : String?
 
-  @[JSON::Field(key: "path", emit_null: true)]
+  @[JSON::Field(key: "path")]
   property path : String?
 
-  @[JSON::Field(key: "size", emit_null: true)]
+  @[JSON::Field(key: "size")]
   property size : Int64?
 
-  @[JSON::Field(key: "dateAdded", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "dateAdded", converter: Sonarr::TimeConverter)]
   property date_added : Time?
 
-  @[JSON::Field(key: "sceneName", emit_null: true)]
+  @[JSON::Field(key: "sceneName")]
   property scene_name : String?
 
-  @[JSON::Field(key: "releaseGroup", emit_null: true)]
+  @[JSON::Field(key: "releaseGroup")]
   property release_group : String?
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::QualityModel?
 
-  @[JSON::Field(key: "customFormats", emit_null: true)]
+  @[JSON::Field(key: "customFormats")]
   property custom_formats = [] of Sonarr::Model::CustomFormatResource
 
-  @[JSON::Field(key: "customFormatScore", emit_null: true)]
+  @[JSON::Field(key: "customFormatScore")]
   property custom_format_score : Int32?
 
-  @[JSON::Field(key: "indexerFlags", emit_null: true)]
+  @[JSON::Field(key: "indexerFlags")]
   property indexer_flags : Int32?
 
-  @[JSON::Field(key: "releaseType", emit_null: true)]
+  @[JSON::Field(key: "releaseType")]
   property release_type : Sonarr::ReleaseType?
 
-  @[JSON::Field(key: "mediaInfo", emit_null: true)]
+  @[JSON::Field(key: "mediaInfo")]
   property media_info : Sonarr::Model::MediaInfoResource?
 
-  @[JSON::Field(key: "qualityCutoffNotMet", emit_null: true)]
+  @[JSON::Field(key: "qualityCutoffNotMet")]
   property quality_cutoff_not_met : Bool?
 end

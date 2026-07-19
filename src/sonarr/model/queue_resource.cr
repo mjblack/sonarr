@@ -2,87 +2,87 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::QueueResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "seriesId", emit_null: true)]
+  @[JSON::Field(key: "seriesId")]
   property series_id : Int32?
 
-  @[JSON::Field(key: "episodeId", emit_null: true)]
+  @[JSON::Field(key: "episodeId")]
   property episode_id : Int32?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "series", emit_null: true)]
+  @[JSON::Field(key: "series")]
   property series : Sonarr::Model::SeriesResource?
 
-  @[JSON::Field(key: "episode", emit_null: true)]
+  @[JSON::Field(key: "episode")]
   property episode : Sonarr::Model::EpisodeResource?
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::QualityModel?
 
-  @[JSON::Field(key: "customFormats", emit_null: true)]
+  @[JSON::Field(key: "customFormats")]
   property custom_formats = [] of Sonarr::Model::CustomFormatResource
 
-  @[JSON::Field(key: "customFormatScore", emit_null: true)]
+  @[JSON::Field(key: "customFormatScore")]
   property custom_format_score : Int32?
 
-  @[JSON::Field(key: "size", emit_null: true)]
+  @[JSON::Field(key: "size")]
   property size : Float64?
 
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "estimatedCompletionTime", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "estimatedCompletionTime", converter: Sonarr::TimeConverter)]
   property estimated_completion_time : Time?
 
-  @[JSON::Field(key: "added", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "added", converter: Sonarr::TimeConverter)]
   property added : Time?
 
-  @[JSON::Field(key: "status", emit_null: true)]
+  @[JSON::Field(key: "status")]
   property status : Sonarr::QueueStatus?
 
-  @[JSON::Field(key: "trackedDownloadStatus", emit_null: true)]
+  @[JSON::Field(key: "trackedDownloadStatus")]
   property tracked_download_status : Sonarr::TrackedDownloadStatus?
 
-  @[JSON::Field(key: "trackedDownloadState", emit_null: true)]
+  @[JSON::Field(key: "trackedDownloadState")]
   property tracked_download_state : Sonarr::TrackedDownloadState?
 
-  @[JSON::Field(key: "statusMessages", emit_null: true)]
+  @[JSON::Field(key: "statusMessages")]
   property status_messages = [] of Sonarr::Model::TrackedDownloadStatusMessage
 
-  @[JSON::Field(key: "errorMessage", emit_null: true)]
+  @[JSON::Field(key: "errorMessage")]
   property error_message : String?
 
-  @[JSON::Field(key: "downloadId", emit_null: true)]
+  @[JSON::Field(key: "downloadId")]
   property download_id : String?
 
-  @[JSON::Field(key: "protocol", emit_null: true)]
+  @[JSON::Field(key: "protocol")]
   property protocol : Sonarr::DownloadProtocol?
 
-  @[JSON::Field(key: "downloadClient", emit_null: true)]
+  @[JSON::Field(key: "downloadClient")]
   property download_client : String?
 
-  @[JSON::Field(key: "downloadClientHasPostImportCategory", emit_null: true)]
+  @[JSON::Field(key: "downloadClientHasPostImportCategory")]
   property download_client_has_post_import_category : Bool?
 
-  @[JSON::Field(key: "indexer", emit_null: true)]
+  @[JSON::Field(key: "indexer")]
   property indexer : String?
 
-  @[JSON::Field(key: "outputPath", emit_null: true)]
+  @[JSON::Field(key: "outputPath")]
   property output_path : String?
 
-  @[JSON::Field(key: "episodeHasFile", emit_null: true)]
+  @[JSON::Field(key: "episodeHasFile")]
   property episode_has_file : Bool?
 
-  @[JSON::Field(key: "sizeleft", emit_null: true)]
+  @[JSON::Field(key: "sizeleft")]
   property sizeleft : Float64?
 
-  @[JSON::Field(key: "timeleft", emit_null: true)]
+  @[JSON::Field(key: "timeleft")]
   property timeleft : String?
 end

@@ -2,15 +2,15 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::SelectOption < Sonarr::Model
-  @[JSON::Field(key: "value", emit_null: true)]
+  @[JSON::Field(key: "value")]
   property value : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "order", emit_null: true)]
+  @[JSON::Field(key: "order")]
   property order : Int32?
 
-  @[JSON::Field(key: "hint", emit_null: true)]
+  @[JSON::Field(key: "hint")]
   property hint : String?
 end

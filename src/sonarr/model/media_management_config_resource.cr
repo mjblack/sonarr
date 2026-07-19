@@ -2,66 +2,66 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::MediaManagementConfigResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "autoUnmonitorPreviouslyDownloadedEpisodes", emit_null: true)]
+  @[JSON::Field(key: "autoUnmonitorPreviouslyDownloadedEpisodes")]
   property auto_unmonitor_previously_downloaded_episodes : Bool?
 
-  @[JSON::Field(key: "recycleBin", emit_null: true)]
+  @[JSON::Field(key: "recycleBin")]
   property recycle_bin : String?
 
-  @[JSON::Field(key: "recycleBinCleanupDays", emit_null: true)]
+  @[JSON::Field(key: "recycleBinCleanupDays")]
   property recycle_bin_cleanup_days : Int32?
 
-  @[JSON::Field(key: "downloadPropersAndRepacks", emit_null: true)]
+  @[JSON::Field(key: "downloadPropersAndRepacks")]
   property download_propers_and_repacks : Sonarr::ProperDownloadTypes?
 
-  @[JSON::Field(key: "createEmptySeriesFolders", emit_null: true)]
+  @[JSON::Field(key: "createEmptySeriesFolders")]
   property create_empty_series_folders : Bool?
 
-  @[JSON::Field(key: "deleteEmptyFolders", emit_null: true)]
+  @[JSON::Field(key: "deleteEmptyFolders")]
   property delete_empty_folders : Bool?
 
-  @[JSON::Field(key: "fileDate", emit_null: true)]
+  @[JSON::Field(key: "fileDate")]
   property file_date : Sonarr::FileDateType?
 
-  @[JSON::Field(key: "rescanAfterRefresh", emit_null: true)]
+  @[JSON::Field(key: "rescanAfterRefresh")]
   property rescan_after_refresh : Sonarr::RescanAfterRefreshType?
 
-  @[JSON::Field(key: "setPermissionsLinux", emit_null: true)]
+  @[JSON::Field(key: "setPermissionsLinux")]
   property set_permissions_linux : Bool?
 
-  @[JSON::Field(key: "chmodFolder", emit_null: true)]
+  @[JSON::Field(key: "chmodFolder")]
   property chmod_folder : String?
 
-  @[JSON::Field(key: "chownGroup", emit_null: true)]
+  @[JSON::Field(key: "chownGroup")]
   property chown_group : String?
 
-  @[JSON::Field(key: "episodeTitleRequired", emit_null: true)]
+  @[JSON::Field(key: "episodeTitleRequired")]
   property episode_title_required : Sonarr::EpisodeTitleRequiredType?
 
-  @[JSON::Field(key: "skipFreeSpaceCheckWhenImporting", emit_null: true)]
+  @[JSON::Field(key: "skipFreeSpaceCheckWhenImporting")]
   property skip_free_space_check_when_importing : Bool?
 
-  @[JSON::Field(key: "minimumFreeSpaceWhenImporting", emit_null: true)]
+  @[JSON::Field(key: "minimumFreeSpaceWhenImporting")]
   property minimum_free_space_when_importing : Int32?
 
-  @[JSON::Field(key: "copyUsingHardlinks", emit_null: true)]
+  @[JSON::Field(key: "copyUsingHardlinks")]
   property copy_using_hardlinks : Bool?
 
-  @[JSON::Field(key: "useScriptImport", emit_null: true)]
+  @[JSON::Field(key: "useScriptImport")]
   property use_script_import : Bool?
 
-  @[JSON::Field(key: "scriptImportPath", emit_null: true)]
+  @[JSON::Field(key: "scriptImportPath")]
   property script_import_path : String?
 
-  @[JSON::Field(key: "importExtraFiles", emit_null: true)]
+  @[JSON::Field(key: "importExtraFiles")]
   property import_extra_files : Bool?
 
-  @[JSON::Field(key: "extraFileExtensions", emit_null: true)]
+  @[JSON::Field(key: "extraFileExtensions")]
   property extra_file_extensions : String?
 
-  @[JSON::Field(key: "enableMediaInfo", emit_null: true)]
+  @[JSON::Field(key: "enableMediaInfo")]
   property enable_media_info : Bool?
 end

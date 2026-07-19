@@ -2,30 +2,30 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::QualityProfileResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "upgradeAllowed", emit_null: true)]
+  @[JSON::Field(key: "upgradeAllowed")]
   property upgrade_allowed : Bool?
 
-  @[JSON::Field(key: "cutoff", emit_null: true)]
+  @[JSON::Field(key: "cutoff")]
   property cutoff : Int32?
 
-  @[JSON::Field(key: "items", emit_null: true)]
+  @[JSON::Field(key: "items")]
   property items = [] of Sonarr::Model::QualityProfileQualityItemResource
 
-  @[JSON::Field(key: "minFormatScore", emit_null: true)]
+  @[JSON::Field(key: "minFormatScore")]
   property min_format_score : Int32?
 
-  @[JSON::Field(key: "cutoffFormatScore", emit_null: true)]
+  @[JSON::Field(key: "cutoffFormatScore")]
   property cutoff_format_score : Int32?
 
-  @[JSON::Field(key: "minUpgradeFormatScore", emit_null: true)]
+  @[JSON::Field(key: "minUpgradeFormatScore")]
   property min_upgrade_format_score : Int32?
 
-  @[JSON::Field(key: "formatItems", emit_null: true)]
+  @[JSON::Field(key: "formatItems")]
   property format_items = [] of Sonarr::Model::ProfileFormatItemResource
 end

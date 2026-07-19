@@ -2,48 +2,48 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::HistoryResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "episodeId", emit_null: true)]
+  @[JSON::Field(key: "episodeId")]
   property episode_id : Int32?
 
-  @[JSON::Field(key: "seriesId", emit_null: true)]
+  @[JSON::Field(key: "seriesId")]
   property series_id : Int32?
 
-  @[JSON::Field(key: "sourceTitle", emit_null: true)]
+  @[JSON::Field(key: "sourceTitle")]
   property source_title : String?
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::QualityModel?
 
-  @[JSON::Field(key: "customFormats", emit_null: true)]
+  @[JSON::Field(key: "customFormats")]
   property custom_formats = [] of Sonarr::Model::CustomFormatResource
 
-  @[JSON::Field(key: "customFormatScore", emit_null: true)]
+  @[JSON::Field(key: "customFormatScore")]
   property custom_format_score : Int32?
 
-  @[JSON::Field(key: "qualityCutoffNotMet", emit_null: true)]
+  @[JSON::Field(key: "qualityCutoffNotMet")]
   property quality_cutoff_not_met : Bool?
 
-  @[JSON::Field(key: "date", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "date", converter: Sonarr::TimeConverter)]
   property date : Time?
 
-  @[JSON::Field(key: "downloadId", emit_null: true)]
+  @[JSON::Field(key: "downloadId")]
   property download_id : String?
 
-  @[JSON::Field(key: "eventType", emit_null: true)]
+  @[JSON::Field(key: "eventType")]
   property event_type : Sonarr::EpisodeHistoryEventType?
 
-  @[JSON::Field(key: "data", emit_null: true)]
+  @[JSON::Field(key: "data")]
   property data : Hash(String, String?)?
 
-  @[JSON::Field(key: "episode", emit_null: true)]
+  @[JSON::Field(key: "episode")]
   property episode : Sonarr::Model::EpisodeResource?
 
-  @[JSON::Field(key: "series", emit_null: true)]
+  @[JSON::Field(key: "series")]
   property series : Sonarr::Model::SeriesResource?
 end

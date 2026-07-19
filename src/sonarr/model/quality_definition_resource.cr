@@ -2,24 +2,24 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::QualityDefinitionResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::Quality?
 
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "weight", emit_null: true)]
+  @[JSON::Field(key: "weight")]
   property weight : Int32?
 
-  @[JSON::Field(key: "minSize", emit_null: true)]
+  @[JSON::Field(key: "minSize")]
   property min_size : Float64?
 
-  @[JSON::Field(key: "maxSize", emit_null: true)]
+  @[JSON::Field(key: "maxSize")]
   property max_size : Float64?
 
-  @[JSON::Field(key: "preferredSize", emit_null: true)]
+  @[JSON::Field(key: "preferredSize")]
   property preferred_size : Float64?
 end

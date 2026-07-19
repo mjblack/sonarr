@@ -2,6 +2,6 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::BlocklistBulkResource < Sonarr::Model
-  @[JSON::Field(key: "ids", emit_null: true)]
+  @[JSON::Field(key: "ids")]
   property ids = [] of Int32
 end

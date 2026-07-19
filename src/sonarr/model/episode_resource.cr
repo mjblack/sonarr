@@ -2,78 +2,78 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::EpisodeResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "seriesId", emit_null: true)]
+  @[JSON::Field(key: "seriesId")]
   property series_id : Int32?
 
-  @[JSON::Field(key: "tvdbId", emit_null: true)]
+  @[JSON::Field(key: "tvdbId")]
   property tvdb_id : Int32?
 
-  @[JSON::Field(key: "episodeFileId", emit_null: true)]
+  @[JSON::Field(key: "episodeFileId")]
   property episode_file_id : Int32?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "episodeNumber", emit_null: true)]
+  @[JSON::Field(key: "episodeNumber")]
   property episode_number : Int32?
 
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "airDate", emit_null: true)]
+  @[JSON::Field(key: "airDate")]
   property air_date : String?
 
-  @[JSON::Field(key: "airDateUtc", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "airDateUtc", converter: Sonarr::TimeConverter)]
   property air_date_utc : Time?
 
-  @[JSON::Field(key: "lastSearchTime", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "lastSearchTime", converter: Sonarr::TimeConverter)]
   property last_search_time : Time?
 
-  @[JSON::Field(key: "runtime", emit_null: true)]
+  @[JSON::Field(key: "runtime")]
   property runtime : Int32?
 
-  @[JSON::Field(key: "finaleType", emit_null: true)]
+  @[JSON::Field(key: "finaleType")]
   property finale_type : String?
 
-  @[JSON::Field(key: "overview", emit_null: true)]
+  @[JSON::Field(key: "overview")]
   property overview : String?
 
-  @[JSON::Field(key: "episodeFile", emit_null: true)]
+  @[JSON::Field(key: "episodeFile")]
   property episode_file : Sonarr::Model::EpisodeFileResource?
 
-  @[JSON::Field(key: "hasFile", emit_null: true)]
+  @[JSON::Field(key: "hasFile")]
   property has_file : Bool?
 
-  @[JSON::Field(key: "monitored", emit_null: true)]
+  @[JSON::Field(key: "monitored")]
   property monitored : Bool?
 
-  @[JSON::Field(key: "absoluteEpisodeNumber", emit_null: true)]
+  @[JSON::Field(key: "absoluteEpisodeNumber")]
   property absolute_episode_number : Int32?
 
-  @[JSON::Field(key: "sceneAbsoluteEpisodeNumber", emit_null: true)]
+  @[JSON::Field(key: "sceneAbsoluteEpisodeNumber")]
   property scene_absolute_episode_number : Int32?
 
-  @[JSON::Field(key: "sceneEpisodeNumber", emit_null: true)]
+  @[JSON::Field(key: "sceneEpisodeNumber")]
   property scene_episode_number : Int32?
 
-  @[JSON::Field(key: "sceneSeasonNumber", emit_null: true)]
+  @[JSON::Field(key: "sceneSeasonNumber")]
   property scene_season_number : Int32?
 
-  @[JSON::Field(key: "unverifiedSceneNumbering", emit_null: true)]
+  @[JSON::Field(key: "unverifiedSceneNumbering")]
   property unverified_scene_numbering : Bool?
 
-  @[JSON::Field(key: "endTime", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "endTime", converter: Sonarr::TimeConverter)]
   property end_time : Time?
 
-  @[JSON::Field(key: "grabDate", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "grabDate", converter: Sonarr::TimeConverter)]
   property grab_date : Time?
 
-  @[JSON::Field(key: "series", emit_null: true)]
+  @[JSON::Field(key: "series")]
   property series : Sonarr::Model::SeriesResource?
 
-  @[JSON::Field(key: "images", emit_null: true)]
+  @[JSON::Field(key: "images")]
   property images = [] of Sonarr::Model::MediaCover
 end

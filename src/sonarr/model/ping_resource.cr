@@ -2,6 +2,6 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::PingResource < Sonarr::Model
-  @[JSON::Field(key: "status", emit_null: true)]
+  @[JSON::Field(key: "status")]
   property status : String?
 end
