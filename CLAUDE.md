@@ -53,13 +53,19 @@ Subagents (`.claude/agents/`):
 - **test-agent** — everything under `spec/` and the Docker integration harness.
 - **doc-writer** — `README.md`, usage/API docs, `CHANGELOG.md`.
 - **pr-reviewer** — read-only review of diffs/PRs for schema compliance, correctness, and coverage.
+- **release-engineer** — keeps `shard.yml` `version:` and `Sonarr::VERSION` in sync and drives the release workflow.
 
 ### GitHub / PR conventions
 - Repo: `mjblack/sonarr` (remote `origin`, `master` is the default branch).
 - Work is tracked by an **epic issue** plus focused per-subsystem issues; each lands as its own reviewed PR.
 - Branch per issue (e.g. `feat/model-generator`, `fix/series-compliance`). Reference the issue in the PR; the pr-reviewer agent reviews before merge.
 
+## Releases
+- The version lives in **two** places that must always agree: `shard.yml` `version:` and `Sonarr::VERSION` in `src/sonarr.cr`. The **release-engineer** agent keeps them in sync.
+- **`.github/workflows/release.yml`** is manually triggered (`gh workflow run release.yml`). It reads the version from `shard.yml`, requires `src/sonarr.cr` to match, runs `crystal spec`, and **only on success** creates the `v<version>` tag and a GitHub release (`--generate-notes`).
+- Cut a release by bumping both version locations (+ CHANGELOG) via a PR, merging to `master`, then triggering the workflow. Never tag/release by hand — the workflow does it after specs pass.
+
 ## Gotchas
 - `shard.lock` is gitignored (this is a library).
-- Enums currently live hand-written in `src/sonarr.cr`; the generator is expected to take these over.
-- Some existing specs don't compile (nil-safety on nilable properties) — being fixed.
+- Models, enums (`src/sonarr/support_enums.cr`), and endpoint modules (`src/sonarr/api/*`) are all **generated** by `tools/generate.cr` — fix the generator, not the output.
+- Integration specs (`spec/integration/`) are opt-in (`SONARR_INTEGRATION=1`); `crystal spec` stays green offline.
