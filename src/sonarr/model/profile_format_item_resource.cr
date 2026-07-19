@@ -2,15 +2,15 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ProfileFormatItemResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "format", emit_null: true)]
+  @[JSON::Field(key: "format")]
   property format : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "score", emit_null: true)]
+  @[JSON::Field(key: "score")]
   property score : Int32?
 end

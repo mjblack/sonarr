@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::RootFolderResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "path", emit_null: true)]
+  @[JSON::Field(key: "path")]
   property path : String?
 
-  @[JSON::Field(key: "accessible", emit_null: true)]
+  @[JSON::Field(key: "accessible")]
   property accessible : Bool?
 
-  @[JSON::Field(key: "freeSpace", emit_null: true)]
+  @[JSON::Field(key: "freeSpace")]
   property free_space : Int64?
 
-  @[JSON::Field(key: "unmappedFolders", emit_null: true)]
+  @[JSON::Field(key: "unmappedFolders")]
   property unmapped_folders = [] of Sonarr::Model::UnmappedFolder
 end

@@ -2,24 +2,24 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::DownloadClientBulkResource < Sonarr::Model
-  @[JSON::Field(key: "ids", emit_null: true)]
+  @[JSON::Field(key: "ids")]
   property ids = [] of Int32
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "applyTags", emit_null: true)]
+  @[JSON::Field(key: "applyTags")]
   property apply_tags : Sonarr::ApplyTags?
 
-  @[JSON::Field(key: "enable", emit_null: true)]
+  @[JSON::Field(key: "enable")]
   property enable : Bool?
 
-  @[JSON::Field(key: "priority", emit_null: true)]
+  @[JSON::Field(key: "priority")]
   property priority : Int32?
 
-  @[JSON::Field(key: "removeCompletedDownloads", emit_null: true)]
+  @[JSON::Field(key: "removeCompletedDownloads")]
   property remove_completed_downloads : Bool?
 
-  @[JSON::Field(key: "removeFailedDownloads", emit_null: true)]
+  @[JSON::Field(key: "removeFailedDownloads")]
   property remove_failed_downloads : Bool?
 end

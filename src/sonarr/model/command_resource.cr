@@ -2,60 +2,60 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::CommandResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "commandName", emit_null: true)]
+  @[JSON::Field(key: "commandName")]
   property command_name : String?
 
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : String?
 
-  @[JSON::Field(key: "body", emit_null: true)]
+  @[JSON::Field(key: "body")]
   property body : Sonarr::Model::Command?
 
-  @[JSON::Field(key: "priority", emit_null: true)]
+  @[JSON::Field(key: "priority")]
   property priority : Sonarr::CommandPriority?
 
-  @[JSON::Field(key: "status", emit_null: true)]
+  @[JSON::Field(key: "status")]
   property status : Sonarr::CommandStatus?
 
-  @[JSON::Field(key: "result", emit_null: true)]
+  @[JSON::Field(key: "result")]
   property result : Sonarr::CommandResult?
 
-  @[JSON::Field(key: "queued", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "queued", converter: Sonarr::TimeConverter)]
   property queued : Time?
 
-  @[JSON::Field(key: "started", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "started", converter: Sonarr::TimeConverter)]
   property started : Time?
 
-  @[JSON::Field(key: "ended", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "ended", converter: Sonarr::TimeConverter)]
   property ended : Time?
 
-  @[JSON::Field(key: "duration", emit_null: true)]
+  @[JSON::Field(key: "duration")]
   property duration : String?
 
-  @[JSON::Field(key: "exception", emit_null: true)]
+  @[JSON::Field(key: "exception")]
   property exception : String?
 
-  @[JSON::Field(key: "trigger", emit_null: true)]
+  @[JSON::Field(key: "trigger")]
   property trigger : Sonarr::CommandTrigger?
 
-  @[JSON::Field(key: "clientUserAgent", emit_null: true)]
+  @[JSON::Field(key: "clientUserAgent")]
   property client_user_agent : String?
 
-  @[JSON::Field(key: "stateChangeTime", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "stateChangeTime", converter: Sonarr::TimeConverter)]
   property state_change_time : Time?
 
-  @[JSON::Field(key: "sendUpdatesToClient", emit_null: true)]
+  @[JSON::Field(key: "sendUpdatesToClient")]
   property send_updates_to_client : Bool?
 
-  @[JSON::Field(key: "updateScheduledTask", emit_null: true)]
+  @[JSON::Field(key: "updateScheduledTask")]
   property update_scheduled_task : Bool?
 
-  @[JSON::Field(key: "lastExecutionTime", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "lastExecutionTime", converter: Sonarr::TimeConverter)]
   property last_execution_time : Time?
 end

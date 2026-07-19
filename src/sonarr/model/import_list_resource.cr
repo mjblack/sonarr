@@ -2,66 +2,66 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ImportListResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "fields", emit_null: true)]
+  @[JSON::Field(key: "fields")]
   property fields = [] of Sonarr::Model::Field
 
-  @[JSON::Field(key: "implementationName", emit_null: true)]
+  @[JSON::Field(key: "implementationName")]
   property implementation_name : String?
 
-  @[JSON::Field(key: "implementation", emit_null: true)]
+  @[JSON::Field(key: "implementation")]
   property implementation : String?
 
-  @[JSON::Field(key: "configContract", emit_null: true)]
+  @[JSON::Field(key: "configContract")]
   property config_contract : String?
 
-  @[JSON::Field(key: "infoLink", emit_null: true)]
+  @[JSON::Field(key: "infoLink")]
   property info_link : String?
 
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : Sonarr::Model::ProviderMessage?
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "presets", emit_null: true)]
+  @[JSON::Field(key: "presets")]
   property presets = [] of Sonarr::Model::ImportListResource
 
-  @[JSON::Field(key: "enableAutomaticAdd", emit_null: true)]
+  @[JSON::Field(key: "enableAutomaticAdd")]
   property enable_automatic_add : Bool?
 
-  @[JSON::Field(key: "searchForMissingEpisodes", emit_null: true)]
+  @[JSON::Field(key: "searchForMissingEpisodes")]
   property search_for_missing_episodes : Bool?
 
-  @[JSON::Field(key: "shouldMonitor", emit_null: true)]
+  @[JSON::Field(key: "shouldMonitor")]
   property should_monitor : Sonarr::MonitorTypes?
 
-  @[JSON::Field(key: "monitorNewItems", emit_null: true)]
+  @[JSON::Field(key: "monitorNewItems")]
   property monitor_new_items : Sonarr::NewItemMonitorTypes?
 
-  @[JSON::Field(key: "rootFolderPath", emit_null: true)]
+  @[JSON::Field(key: "rootFolderPath")]
   property root_folder_path : String?
 
-  @[JSON::Field(key: "qualityProfileId", emit_null: true)]
+  @[JSON::Field(key: "qualityProfileId")]
   property quality_profile_id : Int32?
 
-  @[JSON::Field(key: "seriesType", emit_null: true)]
+  @[JSON::Field(key: "seriesType")]
   property series_type : Sonarr::SeriesTypes?
 
-  @[JSON::Field(key: "seasonFolder", emit_null: true)]
+  @[JSON::Field(key: "seasonFolder")]
   property season_folder : Bool?
 
-  @[JSON::Field(key: "listType", emit_null: true)]
+  @[JSON::Field(key: "listType")]
   property list_type : Sonarr::ImportListType?
 
-  @[JSON::Field(key: "listOrder", emit_null: true)]
+  @[JSON::Field(key: "listOrder")]
   property list_order : Int32?
 
-  @[JSON::Field(key: "minRefreshInterval", emit_null: true)]
+  @[JSON::Field(key: "minRefreshInterval")]
   property min_refresh_interval : String?
 end

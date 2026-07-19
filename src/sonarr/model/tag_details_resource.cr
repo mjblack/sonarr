@@ -2,33 +2,33 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::TagDetailsResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "label", emit_null: true)]
+  @[JSON::Field(key: "label")]
   property label : String?
 
-  @[JSON::Field(key: "delayProfileIds", emit_null: true)]
+  @[JSON::Field(key: "delayProfileIds")]
   property delay_profile_ids = [] of Int32
 
-  @[JSON::Field(key: "importListIds", emit_null: true)]
+  @[JSON::Field(key: "importListIds")]
   property import_list_ids = [] of Int32
 
-  @[JSON::Field(key: "notificationIds", emit_null: true)]
+  @[JSON::Field(key: "notificationIds")]
   property notification_ids = [] of Int32
 
-  @[JSON::Field(key: "restrictionIds", emit_null: true)]
+  @[JSON::Field(key: "restrictionIds")]
   property restriction_ids = [] of Int32
 
-  @[JSON::Field(key: "indexerIds", emit_null: true)]
+  @[JSON::Field(key: "indexerIds")]
   property indexer_ids = [] of Int32
 
-  @[JSON::Field(key: "downloadClientIds", emit_null: true)]
+  @[JSON::Field(key: "downloadClientIds")]
   property download_client_ids = [] of Int32
 
-  @[JSON::Field(key: "autoTagIds", emit_null: true)]
+  @[JSON::Field(key: "autoTagIds")]
   property auto_tag_ids = [] of Int32
 
-  @[JSON::Field(key: "seriesIds", emit_null: true)]
+  @[JSON::Field(key: "seriesIds")]
   property series_ids = [] of Int32
 end

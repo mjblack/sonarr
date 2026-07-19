@@ -2,24 +2,24 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::IndexerBulkResource < Sonarr::Model
-  @[JSON::Field(key: "ids", emit_null: true)]
+  @[JSON::Field(key: "ids")]
   property ids = [] of Int32
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "applyTags", emit_null: true)]
+  @[JSON::Field(key: "applyTags")]
   property apply_tags : Sonarr::ApplyTags?
 
-  @[JSON::Field(key: "enableRss", emit_null: true)]
+  @[JSON::Field(key: "enableRss")]
   property enable_rss : Bool?
 
-  @[JSON::Field(key: "enableAutomaticSearch", emit_null: true)]
+  @[JSON::Field(key: "enableAutomaticSearch")]
   property enable_automatic_search : Bool?
 
-  @[JSON::Field(key: "enableInteractiveSearch", emit_null: true)]
+  @[JSON::Field(key: "enableInteractiveSearch")]
   property enable_interactive_search : Bool?
 
-  @[JSON::Field(key: "priority", emit_null: true)]
+  @[JSON::Field(key: "priority")]
   property priority : Int32?
 end

@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::QualityModel < Sonarr::Model
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::Quality?
 
-  @[JSON::Field(key: "revision", emit_null: true)]
+  @[JSON::Field(key: "revision")]
   property revision : Sonarr::Model::Revision?
 end

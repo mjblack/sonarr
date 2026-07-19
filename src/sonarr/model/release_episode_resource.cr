@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ReleaseEpisodeResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "episodeNumber", emit_null: true)]
+  @[JSON::Field(key: "episodeNumber")]
   property episode_number : Int32?
 
-  @[JSON::Field(key: "absoluteEpisodeNumber", emit_null: true)]
+  @[JSON::Field(key: "absoluteEpisodeNumber")]
   property absolute_episode_number : Int32?
 
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 end

@@ -2,15 +2,15 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::CustomFilterResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "type", emit_null: true)]
+  @[JSON::Field(key: "type")]
   property type_field : String?
 
-  @[JSON::Field(key: "label", emit_null: true)]
+  @[JSON::Field(key: "label")]
   property label : String?
 
-  @[JSON::Field(key: "filters", emit_null: true)]
+  @[JSON::Field(key: "filters")]
   property filters = [] of Hash(String, JSON::Any)
 end

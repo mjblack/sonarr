@@ -2,15 +2,15 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::RemotePathMappingResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "host", emit_null: true)]
+  @[JSON::Field(key: "host")]
   property host : String?
 
-  @[JSON::Field(key: "remotePath", emit_null: true)]
+  @[JSON::Field(key: "remotePath")]
   property remote_path : String?
 
-  @[JSON::Field(key: "localPath", emit_null: true)]
+  @[JSON::Field(key: "localPath")]
   property local_path : String?
 end

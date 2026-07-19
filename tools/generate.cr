@@ -166,8 +166,11 @@ module Generator
     resolved = resolve(schema, prop)
     prop_name = property_name(key)
 
+    # Nil properties are omitted on serialize (Crystal's JSON::Serializable
+    # default) so optional request-body fields don't emit `null`, which live
+    # Sonarr rejects on POST/PUT.
     field = String.build do |builder|
-      builder << %(key: "#{key}", emit_null: true)
+      builder << %(key: "#{key}")
       builder << ", converter: Sonarr::TimeConverter" if resolved.time
     end
 

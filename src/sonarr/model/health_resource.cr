@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::HealthResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "source", emit_null: true)]
+  @[JSON::Field(key: "source")]
   property source : String?
 
-  @[JSON::Field(key: "type", emit_null: true)]
+  @[JSON::Field(key: "type")]
   property type_field : Sonarr::HealthCheckResult?
 
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : String?
 
-  @[JSON::Field(key: "wikiUrl", emit_null: true)]
+  @[JSON::Field(key: "wikiUrl")]
   property wiki_url : Sonarr::Model::HttpUri?
 end

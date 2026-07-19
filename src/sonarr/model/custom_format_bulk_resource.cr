@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::CustomFormatBulkResource < Sonarr::Model
-  @[JSON::Field(key: "ids", emit_null: true)]
+  @[JSON::Field(key: "ids")]
   property ids = [] of Int32
 
-  @[JSON::Field(key: "includeCustomFormatWhenRenaming", emit_null: true)]
+  @[JSON::Field(key: "includeCustomFormatWhenRenaming")]
   property include_custom_format_when_renaming : Bool?
 end

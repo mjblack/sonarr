@@ -2,120 +2,120 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::NotificationResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "fields", emit_null: true)]
+  @[JSON::Field(key: "fields")]
   property fields = [] of Sonarr::Model::Field
 
-  @[JSON::Field(key: "implementationName", emit_null: true)]
+  @[JSON::Field(key: "implementationName")]
   property implementation_name : String?
 
-  @[JSON::Field(key: "implementation", emit_null: true)]
+  @[JSON::Field(key: "implementation")]
   property implementation : String?
 
-  @[JSON::Field(key: "configContract", emit_null: true)]
+  @[JSON::Field(key: "configContract")]
   property config_contract : String?
 
-  @[JSON::Field(key: "infoLink", emit_null: true)]
+  @[JSON::Field(key: "infoLink")]
   property info_link : String?
 
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : Sonarr::Model::ProviderMessage?
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "presets", emit_null: true)]
+  @[JSON::Field(key: "presets")]
   property presets = [] of Sonarr::Model::NotificationResource
 
-  @[JSON::Field(key: "link", emit_null: true)]
+  @[JSON::Field(key: "link")]
   property link : String?
 
-  @[JSON::Field(key: "onGrab", emit_null: true)]
+  @[JSON::Field(key: "onGrab")]
   property on_grab : Bool?
 
-  @[JSON::Field(key: "onDownload", emit_null: true)]
+  @[JSON::Field(key: "onDownload")]
   property on_download : Bool?
 
-  @[JSON::Field(key: "onUpgrade", emit_null: true)]
+  @[JSON::Field(key: "onUpgrade")]
   property on_upgrade : Bool?
 
-  @[JSON::Field(key: "onImportComplete", emit_null: true)]
+  @[JSON::Field(key: "onImportComplete")]
   property on_import_complete : Bool?
 
-  @[JSON::Field(key: "onRename", emit_null: true)]
+  @[JSON::Field(key: "onRename")]
   property on_rename : Bool?
 
-  @[JSON::Field(key: "onSeriesAdd", emit_null: true)]
+  @[JSON::Field(key: "onSeriesAdd")]
   property on_series_add : Bool?
 
-  @[JSON::Field(key: "onSeriesDelete", emit_null: true)]
+  @[JSON::Field(key: "onSeriesDelete")]
   property on_series_delete : Bool?
 
-  @[JSON::Field(key: "onEpisodeFileDelete", emit_null: true)]
+  @[JSON::Field(key: "onEpisodeFileDelete")]
   property on_episode_file_delete : Bool?
 
-  @[JSON::Field(key: "onEpisodeFileDeleteForUpgrade", emit_null: true)]
+  @[JSON::Field(key: "onEpisodeFileDeleteForUpgrade")]
   property on_episode_file_delete_for_upgrade : Bool?
 
-  @[JSON::Field(key: "onHealthIssue", emit_null: true)]
+  @[JSON::Field(key: "onHealthIssue")]
   property on_health_issue : Bool?
 
-  @[JSON::Field(key: "includeHealthWarnings", emit_null: true)]
+  @[JSON::Field(key: "includeHealthWarnings")]
   property include_health_warnings : Bool?
 
-  @[JSON::Field(key: "onHealthRestored", emit_null: true)]
+  @[JSON::Field(key: "onHealthRestored")]
   property on_health_restored : Bool?
 
-  @[JSON::Field(key: "onApplicationUpdate", emit_null: true)]
+  @[JSON::Field(key: "onApplicationUpdate")]
   property on_application_update : Bool?
 
-  @[JSON::Field(key: "onManualInteractionRequired", emit_null: true)]
+  @[JSON::Field(key: "onManualInteractionRequired")]
   property on_manual_interaction_required : Bool?
 
-  @[JSON::Field(key: "supportsOnGrab", emit_null: true)]
+  @[JSON::Field(key: "supportsOnGrab")]
   property supports_on_grab : Bool?
 
-  @[JSON::Field(key: "supportsOnDownload", emit_null: true)]
+  @[JSON::Field(key: "supportsOnDownload")]
   property supports_on_download : Bool?
 
-  @[JSON::Field(key: "supportsOnUpgrade", emit_null: true)]
+  @[JSON::Field(key: "supportsOnUpgrade")]
   property supports_on_upgrade : Bool?
 
-  @[JSON::Field(key: "supportsOnImportComplete", emit_null: true)]
+  @[JSON::Field(key: "supportsOnImportComplete")]
   property supports_on_import_complete : Bool?
 
-  @[JSON::Field(key: "supportsOnRename", emit_null: true)]
+  @[JSON::Field(key: "supportsOnRename")]
   property supports_on_rename : Bool?
 
-  @[JSON::Field(key: "supportsOnSeriesAdd", emit_null: true)]
+  @[JSON::Field(key: "supportsOnSeriesAdd")]
   property supports_on_series_add : Bool?
 
-  @[JSON::Field(key: "supportsOnSeriesDelete", emit_null: true)]
+  @[JSON::Field(key: "supportsOnSeriesDelete")]
   property supports_on_series_delete : Bool?
 
-  @[JSON::Field(key: "supportsOnEpisodeFileDelete", emit_null: true)]
+  @[JSON::Field(key: "supportsOnEpisodeFileDelete")]
   property supports_on_episode_file_delete : Bool?
 
-  @[JSON::Field(key: "supportsOnEpisodeFileDeleteForUpgrade", emit_null: true)]
+  @[JSON::Field(key: "supportsOnEpisodeFileDeleteForUpgrade")]
   property supports_on_episode_file_delete_for_upgrade : Bool?
 
-  @[JSON::Field(key: "supportsOnHealthIssue", emit_null: true)]
+  @[JSON::Field(key: "supportsOnHealthIssue")]
   property supports_on_health_issue : Bool?
 
-  @[JSON::Field(key: "supportsOnHealthRestored", emit_null: true)]
+  @[JSON::Field(key: "supportsOnHealthRestored")]
   property supports_on_health_restored : Bool?
 
-  @[JSON::Field(key: "supportsOnApplicationUpdate", emit_null: true)]
+  @[JSON::Field(key: "supportsOnApplicationUpdate")]
   property supports_on_application_update : Bool?
 
-  @[JSON::Field(key: "supportsOnManualInteractionRequired", emit_null: true)]
+  @[JSON::Field(key: "supportsOnManualInteractionRequired")]
   property supports_on_manual_interaction_required : Bool?
 
-  @[JSON::Field(key: "testCommand", emit_null: true)]
+  @[JSON::Field(key: "testCommand")]
   property test_command : String?
 end

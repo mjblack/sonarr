@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::QualityProfileQualityItemResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::Quality?
 
-  @[JSON::Field(key: "items", emit_null: true)]
+  @[JSON::Field(key: "items")]
   property items = [] of Sonarr::Model::QualityProfileQualityItemResource
 
-  @[JSON::Field(key: "allowed", emit_null: true)]
+  @[JSON::Field(key: "allowed")]
   property allowed : Bool?
 end

@@ -2,12 +2,12 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::LanguageProfileItemResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "language", emit_null: true)]
+  @[JSON::Field(key: "language")]
   property language : Sonarr::Model::Language?
 
-  @[JSON::Field(key: "allowed", emit_null: true)]
+  @[JSON::Field(key: "allowed")]
   property allowed : Bool?
 end

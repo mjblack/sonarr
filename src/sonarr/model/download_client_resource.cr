@@ -2,48 +2,48 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::DownloadClientResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "fields", emit_null: true)]
+  @[JSON::Field(key: "fields")]
   property fields = [] of Sonarr::Model::Field
 
-  @[JSON::Field(key: "implementationName", emit_null: true)]
+  @[JSON::Field(key: "implementationName")]
   property implementation_name : String?
 
-  @[JSON::Field(key: "implementation", emit_null: true)]
+  @[JSON::Field(key: "implementation")]
   property implementation : String?
 
-  @[JSON::Field(key: "configContract", emit_null: true)]
+  @[JSON::Field(key: "configContract")]
   property config_contract : String?
 
-  @[JSON::Field(key: "infoLink", emit_null: true)]
+  @[JSON::Field(key: "infoLink")]
   property info_link : String?
 
-  @[JSON::Field(key: "message", emit_null: true)]
+  @[JSON::Field(key: "message")]
   property message : Sonarr::Model::ProviderMessage?
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "presets", emit_null: true)]
+  @[JSON::Field(key: "presets")]
   property presets = [] of Sonarr::Model::DownloadClientResource
 
-  @[JSON::Field(key: "enable", emit_null: true)]
+  @[JSON::Field(key: "enable")]
   property enable : Bool?
 
-  @[JSON::Field(key: "protocol", emit_null: true)]
+  @[JSON::Field(key: "protocol")]
   property protocol : Sonarr::DownloadProtocol?
 
-  @[JSON::Field(key: "priority", emit_null: true)]
+  @[JSON::Field(key: "priority")]
   property priority : Int32?
 
-  @[JSON::Field(key: "removeCompletedDownloads", emit_null: true)]
+  @[JSON::Field(key: "removeCompletedDownloads")]
   property remove_completed_downloads : Bool?
 
-  @[JSON::Field(key: "removeFailedDownloads", emit_null: true)]
+  @[JSON::Field(key: "removeFailedDownloads")]
   property remove_failed_downloads : Bool?
 end

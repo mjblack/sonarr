@@ -2,21 +2,21 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ImportListBulkResource < Sonarr::Model
-  @[JSON::Field(key: "ids", emit_null: true)]
+  @[JSON::Field(key: "ids")]
   property ids = [] of Int32
 
-  @[JSON::Field(key: "tags", emit_null: true)]
+  @[JSON::Field(key: "tags")]
   property tags = [] of Int32
 
-  @[JSON::Field(key: "applyTags", emit_null: true)]
+  @[JSON::Field(key: "applyTags")]
   property apply_tags : Sonarr::ApplyTags?
 
-  @[JSON::Field(key: "enableAutomaticAdd", emit_null: true)]
+  @[JSON::Field(key: "enableAutomaticAdd")]
   property enable_automatic_add : Bool?
 
-  @[JSON::Field(key: "rootFolderPath", emit_null: true)]
+  @[JSON::Field(key: "rootFolderPath")]
   property root_folder_path : String?
 
-  @[JSON::Field(key: "qualityProfileId", emit_null: true)]
+  @[JSON::Field(key: "qualityProfileId")]
   property quality_profile_id : Int32?
 end

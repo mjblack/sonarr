@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::LocalizationResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "strings", emit_null: true)]
+  @[JSON::Field(key: "strings")]
   property strings : Hash(String, String?)?
 end

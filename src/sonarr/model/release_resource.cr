@@ -2,186 +2,186 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::ReleaseResource < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "guid", emit_null: true)]
+  @[JSON::Field(key: "guid")]
   property guid : String?
 
-  @[JSON::Field(key: "quality", emit_null: true)]
+  @[JSON::Field(key: "quality")]
   property quality : Sonarr::Model::QualityModel?
 
-  @[JSON::Field(key: "qualityWeight", emit_null: true)]
+  @[JSON::Field(key: "qualityWeight")]
   property quality_weight : Int32?
 
-  @[JSON::Field(key: "age", emit_null: true)]
+  @[JSON::Field(key: "age")]
   property age : Int32?
 
-  @[JSON::Field(key: "ageHours", emit_null: true)]
+  @[JSON::Field(key: "ageHours")]
   property age_hours : Float64?
 
-  @[JSON::Field(key: "ageMinutes", emit_null: true)]
+  @[JSON::Field(key: "ageMinutes")]
   property age_minutes : Float64?
 
-  @[JSON::Field(key: "size", emit_null: true)]
+  @[JSON::Field(key: "size")]
   property size : Int64?
 
-  @[JSON::Field(key: "indexerId", emit_null: true)]
+  @[JSON::Field(key: "indexerId")]
   property indexer_id : Int32?
 
-  @[JSON::Field(key: "indexer", emit_null: true)]
+  @[JSON::Field(key: "indexer")]
   property indexer : String?
 
-  @[JSON::Field(key: "releaseGroup", emit_null: true)]
+  @[JSON::Field(key: "releaseGroup")]
   property release_group : String?
 
-  @[JSON::Field(key: "subGroup", emit_null: true)]
+  @[JSON::Field(key: "subGroup")]
   property sub_group : String?
 
-  @[JSON::Field(key: "releaseHash", emit_null: true)]
+  @[JSON::Field(key: "releaseHash")]
   property release_hash : String?
 
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "fullSeason", emit_null: true)]
+  @[JSON::Field(key: "fullSeason")]
   property full_season : Bool?
 
-  @[JSON::Field(key: "sceneSource", emit_null: true)]
+  @[JSON::Field(key: "sceneSource")]
   property scene_source : Bool?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "languages", emit_null: true)]
+  @[JSON::Field(key: "languages")]
   property languages = [] of Sonarr::Model::Language
 
-  @[JSON::Field(key: "languageWeight", emit_null: true)]
+  @[JSON::Field(key: "languageWeight")]
   property language_weight : Int32?
 
-  @[JSON::Field(key: "airDate", emit_null: true)]
+  @[JSON::Field(key: "airDate")]
   property air_date : String?
 
-  @[JSON::Field(key: "seriesTitle", emit_null: true)]
+  @[JSON::Field(key: "seriesTitle")]
   property series_title : String?
 
-  @[JSON::Field(key: "episodeNumbers", emit_null: true)]
+  @[JSON::Field(key: "episodeNumbers")]
   property episode_numbers = [] of Int32
 
-  @[JSON::Field(key: "absoluteEpisodeNumbers", emit_null: true)]
+  @[JSON::Field(key: "absoluteEpisodeNumbers")]
   property absolute_episode_numbers = [] of Int32
 
-  @[JSON::Field(key: "mappedSeasonNumber", emit_null: true)]
+  @[JSON::Field(key: "mappedSeasonNumber")]
   property mapped_season_number : Int32?
 
-  @[JSON::Field(key: "mappedEpisodeNumbers", emit_null: true)]
+  @[JSON::Field(key: "mappedEpisodeNumbers")]
   property mapped_episode_numbers = [] of Int32
 
-  @[JSON::Field(key: "mappedAbsoluteEpisodeNumbers", emit_null: true)]
+  @[JSON::Field(key: "mappedAbsoluteEpisodeNumbers")]
   property mapped_absolute_episode_numbers = [] of Int32
 
-  @[JSON::Field(key: "mappedSeriesId", emit_null: true)]
+  @[JSON::Field(key: "mappedSeriesId")]
   property mapped_series_id : Int32?
 
-  @[JSON::Field(key: "mappedEpisodeInfo", emit_null: true)]
+  @[JSON::Field(key: "mappedEpisodeInfo")]
   property mapped_episode_info = [] of Sonarr::Model::ReleaseEpisodeResource
 
-  @[JSON::Field(key: "approved", emit_null: true)]
+  @[JSON::Field(key: "approved")]
   property approved : Bool?
 
-  @[JSON::Field(key: "temporarilyRejected", emit_null: true)]
+  @[JSON::Field(key: "temporarilyRejected")]
   property temporarily_rejected : Bool?
 
-  @[JSON::Field(key: "rejected", emit_null: true)]
+  @[JSON::Field(key: "rejected")]
   property rejected : Bool?
 
-  @[JSON::Field(key: "tvdbId", emit_null: true)]
+  @[JSON::Field(key: "tvdbId")]
   property tvdb_id : Int32?
 
-  @[JSON::Field(key: "tvRageId", emit_null: true)]
+  @[JSON::Field(key: "tvRageId")]
   property tv_rage_id : Int32?
 
-  @[JSON::Field(key: "imdbId", emit_null: true)]
+  @[JSON::Field(key: "imdbId")]
   property imdb_id : String?
 
-  @[JSON::Field(key: "rejections", emit_null: true)]
+  @[JSON::Field(key: "rejections")]
   property rejections = [] of String
 
-  @[JSON::Field(key: "publishDate", emit_null: true, converter: Sonarr::TimeConverter)]
+  @[JSON::Field(key: "publishDate", converter: Sonarr::TimeConverter)]
   property publish_date : Time?
 
-  @[JSON::Field(key: "commentUrl", emit_null: true)]
+  @[JSON::Field(key: "commentUrl")]
   property comment_url : String?
 
-  @[JSON::Field(key: "downloadUrl", emit_null: true)]
+  @[JSON::Field(key: "downloadUrl")]
   property download_url : String?
 
-  @[JSON::Field(key: "infoUrl", emit_null: true)]
+  @[JSON::Field(key: "infoUrl")]
   property info_url : String?
 
-  @[JSON::Field(key: "episodeRequested", emit_null: true)]
+  @[JSON::Field(key: "episodeRequested")]
   property episode_requested : Bool?
 
-  @[JSON::Field(key: "downloadAllowed", emit_null: true)]
+  @[JSON::Field(key: "downloadAllowed")]
   property download_allowed : Bool?
 
-  @[JSON::Field(key: "releaseWeight", emit_null: true)]
+  @[JSON::Field(key: "releaseWeight")]
   property release_weight : Int32?
 
-  @[JSON::Field(key: "customFormats", emit_null: true)]
+  @[JSON::Field(key: "customFormats")]
   property custom_formats = [] of Sonarr::Model::CustomFormatResource
 
-  @[JSON::Field(key: "customFormatScore", emit_null: true)]
+  @[JSON::Field(key: "customFormatScore")]
   property custom_format_score : Int32?
 
-  @[JSON::Field(key: "sceneMapping", emit_null: true)]
+  @[JSON::Field(key: "sceneMapping")]
   property scene_mapping : Sonarr::Model::AlternateTitleResource?
 
-  @[JSON::Field(key: "magnetUrl", emit_null: true)]
+  @[JSON::Field(key: "magnetUrl")]
   property magnet_url : String?
 
-  @[JSON::Field(key: "infoHash", emit_null: true)]
+  @[JSON::Field(key: "infoHash")]
   property info_hash : String?
 
-  @[JSON::Field(key: "seeders", emit_null: true)]
+  @[JSON::Field(key: "seeders")]
   property seeders : Int32?
 
-  @[JSON::Field(key: "leechers", emit_null: true)]
+  @[JSON::Field(key: "leechers")]
   property leechers : Int32?
 
-  @[JSON::Field(key: "protocol", emit_null: true)]
+  @[JSON::Field(key: "protocol")]
   property protocol : Sonarr::DownloadProtocol?
 
-  @[JSON::Field(key: "indexerFlags", emit_null: true)]
+  @[JSON::Field(key: "indexerFlags")]
   property indexer_flags : Int32?
 
-  @[JSON::Field(key: "isDaily", emit_null: true)]
+  @[JSON::Field(key: "isDaily")]
   property is_daily : Bool?
 
-  @[JSON::Field(key: "isAbsoluteNumbering", emit_null: true)]
+  @[JSON::Field(key: "isAbsoluteNumbering")]
   property is_absolute_numbering : Bool?
 
-  @[JSON::Field(key: "isPossibleSpecialEpisode", emit_null: true)]
+  @[JSON::Field(key: "isPossibleSpecialEpisode")]
   property is_possible_special_episode : Bool?
 
-  @[JSON::Field(key: "special", emit_null: true)]
+  @[JSON::Field(key: "special")]
   property special : Bool?
 
-  @[JSON::Field(key: "seriesId", emit_null: true)]
+  @[JSON::Field(key: "seriesId")]
   property series_id : Int32?
 
-  @[JSON::Field(key: "episodeId", emit_null: true)]
+  @[JSON::Field(key: "episodeId")]
   property episode_id : Int32?
 
-  @[JSON::Field(key: "episodeIds", emit_null: true)]
+  @[JSON::Field(key: "episodeIds")]
   property episode_ids = [] of Int32
 
-  @[JSON::Field(key: "downloadClientId", emit_null: true)]
+  @[JSON::Field(key: "downloadClientId")]
   property download_client_id : Int32?
 
-  @[JSON::Field(key: "downloadClient", emit_null: true)]
+  @[JSON::Field(key: "downloadClient")]
   property download_client : String?
 
-  @[JSON::Field(key: "shouldOverride", emit_null: true)]
+  @[JSON::Field(key: "shouldOverride")]
   property should_override : Bool?
 end

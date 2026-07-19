@@ -2,24 +2,24 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::AutoTaggingSpecificationSchema < Sonarr::Model
-  @[JSON::Field(key: "id", emit_null: true)]
+  @[JSON::Field(key: "id")]
   property id : Int32?
 
-  @[JSON::Field(key: "name", emit_null: true)]
+  @[JSON::Field(key: "name")]
   property name : String?
 
-  @[JSON::Field(key: "implementation", emit_null: true)]
+  @[JSON::Field(key: "implementation")]
   property implementation : String?
 
-  @[JSON::Field(key: "implementationName", emit_null: true)]
+  @[JSON::Field(key: "implementationName")]
   property implementation_name : String?
 
-  @[JSON::Field(key: "negate", emit_null: true)]
+  @[JSON::Field(key: "negate")]
   property negate : Bool?
 
-  @[JSON::Field(key: "required", emit_null: true)]
+  @[JSON::Field(key: "required")]
   property required : Bool?
 
-  @[JSON::Field(key: "fields", emit_null: true)]
+  @[JSON::Field(key: "fields")]
   property fields = [] of Sonarr::Model::Field
 end

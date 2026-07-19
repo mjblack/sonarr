@@ -2,18 +2,18 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::AlternateTitleResource < Sonarr::Model
-  @[JSON::Field(key: "title", emit_null: true)]
+  @[JSON::Field(key: "title")]
   property title : String?
 
-  @[JSON::Field(key: "seasonNumber", emit_null: true)]
+  @[JSON::Field(key: "seasonNumber")]
   property season_number : Int32?
 
-  @[JSON::Field(key: "sceneSeasonNumber", emit_null: true)]
+  @[JSON::Field(key: "sceneSeasonNumber")]
   property scene_season_number : Int32?
 
-  @[JSON::Field(key: "sceneOrigin", emit_null: true)]
+  @[JSON::Field(key: "sceneOrigin")]
   property scene_origin : String?
 
-  @[JSON::Field(key: "comment", emit_null: true)]
+  @[JSON::Field(key: "comment")]
   property comment : String?
 end

@@ -2,6 +2,6 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::LocalizationLanguageResource < Sonarr::Model
-  @[JSON::Field(key: "identifier", emit_null: true)]
+  @[JSON::Field(key: "identifier")]
   property identifier : String?
 end

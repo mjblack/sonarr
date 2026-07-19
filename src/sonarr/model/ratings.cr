@@ -2,9 +2,9 @@
 # Regenerate via: crystal run tools/generate.cr
 
 class Sonarr::Model::Ratings < Sonarr::Model
-  @[JSON::Field(key: "votes", emit_null: true)]
+  @[JSON::Field(key: "votes")]
   property votes : Int32?
 
-  @[JSON::Field(key: "value", emit_null: true)]
+  @[JSON::Field(key: "value")]
   property value : Float64?
 end
