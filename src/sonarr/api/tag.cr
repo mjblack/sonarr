@@ -17,7 +17,7 @@ class Sonarr::Api::Tag
     @client.request_one(:get, "/api/v3/tag/#{id}", Sonarr::Model::TagResource)
   end
 
-  def update(id : String, body : Sonarr::Model::TagResource) : Sonarr::Model::TagResource?
+  def update(id : Int32, body : Sonarr::Model::TagResource) : Sonarr::Model::TagResource?
     @client.request_one(:put, "/api/v3/tag/#{id}", Sonarr::Model::TagResource, nil, body)
   end
 

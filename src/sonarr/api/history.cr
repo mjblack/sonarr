@@ -26,7 +26,7 @@ class Sonarr::Api::History
     @client.request(:post, "/api/v3/history/failed/#{id}")
   end
 
-  def get_series(series_id : Int32? = nil, season_number : Int32? = nil, event_type : Sonarr::EpisodeHistoryEventType? = nil, include_series : Bool? = nil, include_episode : Bool? = nil) : Array(Sonarr::Model::HistoryResource)
+  def list_series(series_id : Int32? = nil, season_number : Int32? = nil, event_type : Sonarr::EpisodeHistoryEventType? = nil, include_series : Bool? = nil, include_episode : Bool? = nil) : Array(Sonarr::Model::HistoryResource)
     query = Sonarr::Query.new
     query.add("seriesId", series_id)
     query.add("seasonNumber", season_number)
@@ -36,7 +36,7 @@ class Sonarr::Api::History
     @client.request_many(:get, "/api/v3/history/series", Sonarr::Model::HistoryResource, query)
   end
 
-  def get_since(date : Time? = nil, event_type : Sonarr::EpisodeHistoryEventType? = nil, include_series : Bool? = nil, include_episode : Bool? = nil) : Array(Sonarr::Model::HistoryResource)
+  def list_since(date : Time? = nil, event_type : Sonarr::EpisodeHistoryEventType? = nil, include_series : Bool? = nil, include_episode : Bool? = nil) : Array(Sonarr::Model::HistoryResource)
     query = Sonarr::Query.new
     query.add("date", date)
     query.add("eventType", event_type)
