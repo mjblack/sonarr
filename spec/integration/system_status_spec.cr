@@ -1,29 +1,17 @@
 require "../integration_helper"
 
-# GET /api/v3/system/status — the most fundamental endpoint a bare Sonarr
-# exposes. Asserts HTTP status + JSON shape, and additionally proves the
-# clearly-stable Sonarr::Model::SystemResource deserializes against the live
-# payload.
-describe "integration: system/status" do
-  integration_it "returns 200 with a well-formed status document" do
-    resp = IntegrationHelper.get("/api/v3/system/status")
-    resp.status_code.should eq(200)
+# Api::System#list_status — the most fundamental endpoint a bare Sonarr exposes.
+# Exercises the typed round-trip: GET /api/v3/system/status deserialized into a
+# Sonarr::Model::SystemResource.
+describe "integration: Api::System" do
+  integration_it "#list_status returns a typed SystemResource" do
+    system = Sonarr::Api::System.new(IntegrationHelper.client)
 
-    json = JSON.parse(resp.body)
-    json["appName"].as_s.should eq("Sonarr")
-    json["version"].as_s.should_not be_empty
-    # A containerised Sonarr always reports these two.
-    json["isDocker"].as_bool.should be_true
-    json["isLinux"].as_bool.should be_true
-  end
-
-  integration_it "deserializes into the stable SystemResource model" do
-    resp = IntegrationHelper.get("/api/v3/system/status")
-    resp.status_code.should eq(200)
-
-    status = Sonarr::Model::SystemResource.from_json(resp.body)
+    status = present(system.list_status)
     status.app_name.should eq("Sonarr")
-    status.version.should_not be_nil
+    present(status.version).should_not be_empty
+    # A containerised Sonarr always reports these.
     status.is_docker.should be_true
+    status.is_linux.should be_true
   end
 end
