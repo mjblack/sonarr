@@ -1,13 +1,15 @@
 # ameba:disable Lint/SpecFilename — this is a shared helper, not a spec file.
 require "./spec_helper"
 require "http/client"
-require "json"
 
-# Shared helper for the opt-in integration specs (Epic A / A6).
+# Shared helper for the opt-in integration specs (Epic A / A6, Epic B / B4).
 #
 # The integration specs under spec/integration/ run against a LIVE Sonarr
 # container brought up by scripts/sonarr-testenv.sh / docker-compose.yml. They
-# are opt-in and must never break a plain, offline `crystal spec`:
+# exercise the GENERATED, typed endpoint methods (Sonarr::Api::<Group>) through
+# a configured Sonarr::Client — typed request in, typed model out.
+#
+# They are opt-in and must never break a plain, offline `crystal spec`:
 #
 #   * Set SONARR_INTEGRATION=1 to actually exercise them.
 #   * When the env var is unset, OR the container is not reachable, the specs
@@ -69,46 +71,16 @@ module IntegrationHelper
     end
   end
 
-  # ---- HTTP plumbing -------------------------------------------------------
+  # ---- Typed client --------------------------------------------------------
   #
-  # Direct JSON requests with the X-Api-Key header. Deliberately NOT coupled to
-  # the (currently-being-regenerated) model API; specs assert on HTTP status +
-  # parsed JSON, deserializing only into clearly-stable models where useful.
+  # A single configured Sonarr::Client pointed at the live container. The
+  # generated endpoint groups (Sonarr::Api::System, Api::Tag, ...) are built on
+  # top of it: `Sonarr::Api::Tag.new(IntegrationHelper.client)`.
 
-  def self.headers : HTTP::Headers
-    HTTP::Headers{
-      "X-Api-Key"    => api_key,
-      "Accept"       => "application/json",
-      "Content-Type" => "application/json",
-    }
-  end
+  @@client : Sonarr::Client?
 
-  def self.request(method : String, path : String, body : String? = nil) : HTTP::Client::Response
-    uri = URI.parse(base_url)
-    client = HTTP::Client.new(uri)
-    client.connect_timeout = 5.seconds
-    client.read_timeout = 15.seconds
-    begin
-      client.exec(method, path, headers: headers, body: body)
-    ensure
-      client.close
-    end
-  end
-
-  def self.get(path : String) : HTTP::Client::Response
-    request("GET", path)
-  end
-
-  def self.post(path : String, body : String) : HTTP::Client::Response
-    request("POST", path, body)
-  end
-
-  def self.put(path : String, body : String) : HTTP::Client::Response
-    request("PUT", path, body)
-  end
-
-  def self.delete(path : String) : HTTP::Client::Response
-    request("DELETE", path)
+  def self.client : Sonarr::Client
+    @@client ||= Sonarr::Client.new(base_url, api_key)
   end
 end
 
