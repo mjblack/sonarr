@@ -37,4 +37,21 @@ module Sonarr
       new(response.status_code.to_i, response.body)
     end
   end
+
+  # Raised when a request exceeds the client's configured read/connect timeout.
+  #
+  # The client wraps the underlying `IO::TimeoutError` into this type so callers
+  # can rescue it (or `Sonarr::ApiError` / `Sonarr::Error`) without needing to
+  # know about the HTTP shard. A status code of `0` signals that no HTTP
+  # response was ever received.
+  class TimeoutError < ApiError
+    def initialize(message : String? = nil)
+      super(0, "", message || "Sonarr API request timed out")
+    end
+
+    # Wraps an `IO::TimeoutError` raised while issuing a request.
+    def self.from_timeout(ex : IO::TimeoutError) : TimeoutError
+      new("Sonarr API request timed out: #{ex.message}")
+    end
+  end
 end

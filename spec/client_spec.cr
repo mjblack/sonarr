@@ -132,6 +132,65 @@ describe "Sonarr::Client typed deserialization" do
   end
 end
 
+describe "Sonarr::Client timeout configuration" do
+  it "applies the class-var defaults when unspecified" do
+    client = Sonarr::Client.new("http://localhost:8989", "key")
+    client.read_timeout.should eq(Sonarr::Client.default_read_timeout)
+    client.connect_timeout.should eq(Sonarr::Client.default_connect_timeout)
+  end
+
+  it "resolves an explicit nil to the class-var default" do
+    client = Sonarr::Client.new("http://localhost:8989", "key",
+      read_timeout: nil, connect_timeout: nil)
+    client.read_timeout.should eq(Sonarr::Client.default_read_timeout)
+    client.connect_timeout.should eq(Sonarr::Client.default_connect_timeout)
+  end
+
+  it "stores explicit timeout overrides" do
+    client = Sonarr::Client.new("http://localhost:8989", "key",
+      read_timeout: 5.seconds, connect_timeout: 2.seconds)
+    client.read_timeout.should eq(5.seconds)
+    client.connect_timeout.should eq(2.seconds)
+  end
+
+  it "allows overriding a single timeout while defaulting the other" do
+    client = Sonarr::Client.new("http://localhost:8989", "key", read_timeout: 1.second)
+    client.read_timeout.should eq(1.second)
+    client.connect_timeout.should eq(Sonarr::Client.default_connect_timeout)
+  end
+
+  it "picks up a changed class-var default for new clients" do
+    original = Sonarr::Client.default_read_timeout
+    begin
+      Sonarr::Client.default_read_timeout = 99.seconds
+      Sonarr::Client.new("http://localhost:8989", "key").read_timeout.should eq(99.seconds)
+    ensure
+      Sonarr::Client.default_read_timeout = original
+    end
+  end
+end
+
+describe Sonarr::TimeoutError do
+  it "is a Sonarr::ApiError and Sonarr::Error" do
+    error = Sonarr::TimeoutError.new
+    error.should be_a(Sonarr::ApiError)
+    error.should be_a(Sonarr::Error)
+  end
+
+  it "reports a zero status code and an informative message" do
+    error = Sonarr::TimeoutError.new
+    error.status_code.should eq(0)
+    present(error.message).should contain("timed out")
+  end
+
+  it "wraps an IO::TimeoutError, retaining the underlying detail" do
+    error = Sonarr::TimeoutError.from_timeout(IO::TimeoutError.new("read timed out"))
+    message = present(error.message)
+    message.should contain("timed out")
+    message.should contain("read timed out")
+  end
+end
+
 describe Sonarr::ApiError do
   it "carries the status code and body" do
     error = Sonarr::ApiError.new(404, %({"message":"Not Found"}))
