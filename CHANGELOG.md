@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-07-21
+
+### Added
+
+- Configurable HTTP timeout on `Sonarr::Client`. `read_timeout`/`connect_timeout`
+  are optional constructor params (`Time::Span?`); when omitted they fall back
+  to the class-level defaults `Sonarr::Client.default_read_timeout` (30s) and
+  `default_connect_timeout` (10s), which are `class_property` accessors so the
+  defaults can be tuned globally. The timeouts are applied to every request.
+
+### Fixed
+
+- An unresponsive server no longer hangs a request forever: a socket timeout is
+  now raised as a rescuable `Sonarr::TimeoutError` (a `Sonarr::ApiError`)
+  instead of leaking a raw `IO::TimeoutError`.
+
 ## [0.2.0] - 2026-07-18
 
 Epic A: bring the model layer into full compliance with the Sonarr v3 OpenAPI
